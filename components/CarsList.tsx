@@ -1,4 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import EditIcon from "@mui/icons-material/Edit";
+import RemoveBtn from "./RemoveBtn";
 
 export default function CarsList() {
   return (
@@ -26,12 +30,18 @@ export default function CarsList() {
           </div>
         </div>
 
-        <div className="flex h-1/2 flex-col items-end justify-between gap-2">
-          <div className="flex gap-5">
+        <div className="flex flex-col items-end justify-between gap-2">
+          <div className="flex gap-3">
             <h3>Location</h3>
             <h3>Clearence</h3>
           </div>
           <h1>Price $</h1>
+          <div className="flex gap-2">
+            <RemoveBtn />
+            <Link href={"/editListing/1"}>
+              <EditIcon fontSize="medium" />
+            </Link>
+          </div>
         </div>
       </div>
     </>
