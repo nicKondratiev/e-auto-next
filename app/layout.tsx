@@ -19,7 +19,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex justify-center bg-gray-200 py-5`}
       >
-        <div>
+        <div className="flex flex-col gap-4">
           <Navbar />
           {children}
         </div>
