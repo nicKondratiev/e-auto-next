@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 // reusables
 import DropDown from "../dropdown/Dropdown";
 import Child from "../dropdown/Child";
@@ -15,15 +17,20 @@ export default function Manu() {
 
   const manufacturers = carsData.map((car) => car.brand);
 
+  const [inputVal, setInputVal] = useState<string>("");
+
   return (
     <div>
       <DropDown
         canOpen={true}
         header="Manufacturer"
+        inputVal={inputVal}
+        setInputVal={setInputVal}
         setItem={store.addManu}
         Child={
           <Child
             data={manufacturers}
+            inputVal={inputVal}
             item={store.searchParams.manu}
             setItem={store.addManu}
           />
