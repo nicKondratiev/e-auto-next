@@ -1,5 +1,6 @@
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import Manu from "../../components/dropdown_components/Manu";
+import Models from "../../components/dropdown_components/Models";
 
 export default function addListing() {
   return (
@@ -10,8 +11,9 @@ export default function addListing() {
           <h3>Primary Features</h3>
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <Manu />
+          <Models />
         </div>
       </div>
     </div>

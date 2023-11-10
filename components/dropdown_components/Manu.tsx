@@ -20,23 +20,21 @@ export default function Manu() {
   const [inputVal, setInputVal] = useState<string>("");
 
   return (
-    <div>
-      <DropDown
-        canOpen={true}
-        header="Manufacturer"
-        inputVal={inputVal}
-        setInputVal={setInputVal}
-        setItem={store.addManu}
-        Child={
-          <Child
-            data={manufacturers}
-            inputVal={inputVal}
-            item={store.searchParams.manu}
-            setItem={store.addManu}
-          />
-        }
-        item={store.searchParams.manu}
-      />
-    </div>
+    <DropDown
+      canOpen={true}
+      header="Manufacturer"
+      inputVal={inputVal}
+      setInputVal={setInputVal}
+      setItem={store.addManu}
+      Child={
+        <Child
+          data={manufacturers}
+          inputVal={inputVal}
+          item={store.searchParams.manu}
+          setItem={store.addManu}
+        />
+      }
+      item={store.searchParams.manu}
+    />
   );
 }

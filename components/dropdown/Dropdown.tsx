@@ -8,6 +8,7 @@ import { SetStateAction, Dispatch } from "react";
 import "./styles.css";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import CloseIcon from "@mui/icons-material/Close";
 
 type DropDownProps = {
   header: string;
@@ -25,7 +26,7 @@ const DropDown = ({
   item,
   inputVal,
   setInputVal,
-  // setItem,
+  setItem,
   canOpen,
 }: DropDownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +64,7 @@ const DropDown = ({
   };
 
   return (
-    <div ref={dropdownRef} className="absolute flex w-full lg:w-auto">
+    <div ref={dropdownRef} className="relative flex w-full lg:w-fit">
       {isOpen && (
         <div className="overlay md:hidden" onClick={closeDropdown}></div>
       )}
@@ -74,7 +75,7 @@ const DropDown = ({
             : () => null
         } // we have to check data truthiness because we don't want to open models dropdown before we have manu selected
         className={`${
-          !canOpen ? "border-none bg-gray-100 text-gray-300" : ""
+          !canOpen ? "border-1 bg-gray-100 text-gray-300" : ""
         } dropdown-outter flex w-full overflow-hidden lg:w-[250px]`}
       >
         <div className="relative flex h-auto flex-col justify-center">
@@ -105,12 +106,20 @@ const DropDown = ({
           </span>
         </div>
         <div className="rounded-full p-1.5 hover:bg-gray-100">
-          <KeyboardArrowDownIcon
-            className={`${
-              isOpen ? "open-animation rotate-180" : "close-animation rotate-0"
-            }`}
-            fontSize="small"
-          />
+          {!item ? (
+            <KeyboardArrowDownIcon
+              className={`${
+                isOpen
+                  ? "open-animation rotate-180"
+                  : "close-animation rotate-0"
+              }`}
+              fontSize="small"
+            />
+          ) : (
+            <button onClick={() => setItem("")}>
+              <CloseIcon className="scale-75" fontSize="small" />
+            </button>
+          )}
         </div>
       </div>
 
