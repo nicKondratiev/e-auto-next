@@ -5,19 +5,14 @@ type SearchParams = {
   model: string;
   location: string;
   custom: string;
-  year: FromTo;
-  price: FromTo;
+  year: string;
+  price: string;
   fuelType: string;
-};
-
-type FromTo = {
-  from: number;
-  to: number;
 };
 
 // we create this types to avoid writing same types again and again
 type StringVoid = (val: string) => void;
-type NumVoid = (val: number) => void;
+// type NumVoid = (val: number) => void;
 
 type Store = {
   searchParams: SearchParams;
@@ -25,10 +20,8 @@ type Store = {
   addModel: StringVoid;
   addLocation: StringVoid;
   addFuelType: StringVoid;
-  addYearFrom: NumVoid;
-  addYearTo: NumVoid;
-  addPriceFrom: NumVoid;
-  addPriceTo: NumVoid;
+  addYear: StringVoid;
+  addPrice: StringVoid;
   addCustom: StringVoid;
 };
 
@@ -38,8 +31,8 @@ const useStore = create<Store>((set) => ({
     model: "",
     location: "",
     custom: "",
-    year: { from: 0, to: 0 },
-    price: { from: 0, to: 0 },
+    year: "",
+    price: "",
     fuelType: "",
   },
   addManu: (manu) =>
@@ -75,47 +68,19 @@ const useStore = create<Store>((set) => ({
       },
     })),
 
-  addYearFrom: (year) =>
+  addYear: (year) =>
     set((state) => ({
       searchParams: {
         ...state.searchParams,
-        year: {
-          ...state.searchParams.year,
-          from: year,
-        },
+        year: year,
       },
     })),
 
-  addYearTo: (year) =>
+  addPrice: (price) =>
     set((state) => ({
       searchParams: {
         ...state.searchParams,
-        year: {
-          ...state.searchParams.year,
-          to: year,
-        },
-      },
-    })),
-
-  addPriceFrom: (price) =>
-    set((state) => ({
-      searchParams: {
-        ...state.searchParams,
-        price: {
-          ...state.searchParams.price,
-          from: price,
-        },
-      },
-    })),
-
-  addPriceTo: (price) =>
-    set((state) => ({
-      searchParams: {
-        ...state.searchParams,
-        price: {
-          ...state.searchParams.price,
-          to: price,
-        },
+        price: price,
       },
     })),
 
