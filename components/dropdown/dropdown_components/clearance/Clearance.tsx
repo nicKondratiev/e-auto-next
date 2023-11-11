@@ -4,7 +4,7 @@
 import "./styles.css";
 
 // useStore from zustand
-import useStore from "../../../app/store";
+import useStore from "../../../../app/store";
 
 import ClearanceButton from "./ClearanceButton";
 

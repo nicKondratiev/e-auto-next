@@ -1,5 +1,5 @@
 .dropdown-outter {
-  @apply box-border flex h-[50px] text-black border rounded-lg cursor-pointer items-center justify-between px-3 text-sm hover:border-[0.5px] duration-150 ease-in hover:border-black bg-white;
+  @apply box-border flex h-[50px] text-black border rounded-lg cursor-pointer items-center justify-between px-3 text-sm hover:border-[0.5px] duration-150 ease-in bg-white;
 }
 
 .scrollbar::-webkit-scrollbar {

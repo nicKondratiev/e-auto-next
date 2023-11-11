@@ -1,6 +1,6 @@
 "use client";
 
-import useStore from "../../../app/store";
+import useStore from "../../../../app/store";
 
 import data from "./years.json";
 

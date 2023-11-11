@@ -76,7 +76,7 @@ const DropDown = ({
         } // we have to check data truthiness because we don't want to open models dropdown before we have manu selected
         className={`${
           !canOpen ? "border-1 bg-gray-100 text-gray-300" : ""
-        } dropdown-outter flex w-full overflow-hidden lg:w-[250px]`}
+        } dropdown-outter flex w-full overflow-hidden lg:w-[350px]`}
       >
         <div className="relative flex h-auto flex-col justify-center">
           <span
@@ -128,7 +128,7 @@ const DropDown = ({
           isOpen
             ? "fixed bottom-[0px] lg:absolute"
             : "fixed bottom-[-1000px] lg:hidden"
-        } z-50 flex h-2/3 w-full flex-col overflow-hidden rounded-t-xl border bg-white duration-300 ease-in lg:left-0 lg:top-16 lg:h-[270px] lg:w-[300px] lg:rounded-xl lg:duration-0`}
+        } z-50 flex h-2/3 w-full flex-col overflow-hidden rounded-t-xl border bg-white duration-300 ease-in lg:left-0 lg:top-16 lg:h-[270px] lg:w-[350px] lg:rounded-xl lg:duration-0`}
       >
         <div
           onClick={closeDropdown}

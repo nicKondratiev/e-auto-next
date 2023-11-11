@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 // reusables
-import DropDown from "../dropdown/Dropdown";
-import Child from "../dropdown/Child";
+import DropDown from "../Dropdown";
+import Child from "../Child";
 
 // zustand store
-import useStore from "../../app/store";
+import useStore from "../../../app/store";
 
 // json data
-import carsData from "../../app/json/carsData.json";
+import carsData from "../../../app/json/carsData.json";
 
 export default function Manu() {
   const store = useStore();

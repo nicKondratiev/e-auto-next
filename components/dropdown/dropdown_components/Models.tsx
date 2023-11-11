@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 // reusables
-import Child from "../dropdown/Child";
-import DropDown from "../dropdown/Dropdown";
+import Child from "../Child";
+import DropDown from "../Dropdown";
 
 // json data
-import carsData from "../../app/json/carsData.json";
+import carsData from "../../../app/json/carsData.json";
 
 // useStore from zustand
-import useStore from "../../app/store";
+import useStore from "../../../app/store";
 
 const Models = () => {
   const store = useStore();

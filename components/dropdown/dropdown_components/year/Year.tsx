@@ -1,12 +1,12 @@
 "use client";
 
-import DropDown from "../../dropdown/Dropdown";
+import DropDown from "../../Dropdown";
 import YearChild from "./YearChild";
 
-import useStore from "../../../app/store";
+import useStore from "../../../../app/store";
 // import { fromToSetter } from "../fromTo/FromTo";
 import { useState } from "react";
-import Child from "../../dropdown/Child";
+import Child from "../../Child";
 
 function Year() {
   const store = useStore();
