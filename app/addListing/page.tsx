@@ -1,6 +1,7 @@
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import Manu from "../../components/dropdown_components/Manu";
 import Models from "../../components/dropdown_components/Models";
+import Locations from "../../components/dropdown_components/Locations";
 
 export default function addListing() {
   return (
@@ -14,6 +15,7 @@ export default function addListing() {
         <div className="flex flex-col gap-2">
           <Manu />
           <Models />
+          <Locations />
         </div>
       </div>
     </div>
