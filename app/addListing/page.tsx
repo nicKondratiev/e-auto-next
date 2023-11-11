@@ -2,6 +2,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import Manu from "../../components/dropdown_components/Manu";
 import Models from "../../components/dropdown_components/Models";
 import Locations from "../../components/dropdown_components/Locations";
+import Clearance from "../../components/dropdown_components/clearance/Clearance";
 
 export default function addListing() {
   return (
@@ -16,6 +17,7 @@ export default function addListing() {
           <Manu />
           <Models />
           <Locations />
+          <Clearance />
         </div>
       </div>
     </div>
