@@ -4,6 +4,7 @@ import Models from "../../../components/dropdown/dropdown_components/Models";
 import Locations from "../../../components/dropdown/dropdown_components/Locations";
 import Year from "../../../components/dropdown/dropdown_components/year/Year";
 import Wheel from "../../../components/selectable/selectable_component/Wheel";
+import Transmission from "../../../components/selectable/selectable_component/Transmission";
 
 export default function PrimaryFeatures() {
   return (
@@ -28,6 +29,7 @@ export default function PrimaryFeatures() {
 
       <div>
         <Wheel />
+        <Transmission />
       </div>
     </div>
   );
