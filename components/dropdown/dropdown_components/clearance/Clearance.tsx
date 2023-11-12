@@ -22,7 +22,7 @@ export default function Clearance() {
   };
 
   return (
-    <div className="flex w-full items-center justify-center rounded-lg lg:w-[180px]">
+    <div className="flex w-full items-center justify-center rounded-lg lg:w-[350px]">
       <ClearanceButton
         value="Cleared"
         onClick={() => setCustom("0")}

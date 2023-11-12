@@ -10,6 +10,7 @@ type SearchParams = {
   fuelType: string;
   wheel: string;
   transmission: string;
+  mileage: string;
 };
 
 // we create this types to avoid writing same types again and again
@@ -26,6 +27,7 @@ type Store = {
   addCustom: StringVoid;
   addWheel: StringVoid;
   addTransmission: StringVoid;
+  addMileage: StringVoid;
 };
 
 const useStore = create<Store>((set) => ({
@@ -39,6 +41,7 @@ const useStore = create<Store>((set) => ({
     fuelType: "",
     wheel: "",
     transmission: "",
+    mileage: "",
   },
   addManu: (manu) =>
     set((state) => ({
@@ -110,6 +113,14 @@ const useStore = create<Store>((set) => ({
       searchParams: {
         ...state.searchParams,
         transmission: transmission,
+      },
+    })),
+
+  addMileage: (mileage) =>
+    set((state) => ({
+      searchParams: {
+        ...state.searchParams,
+        mileage: mileage,
       },
     })),
 }));
