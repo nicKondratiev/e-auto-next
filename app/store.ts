@@ -8,11 +8,11 @@ type SearchParams = {
   year: string;
   price: string;
   fuelType: string;
+  wheel: string;
 };
 
 // we create this types to avoid writing same types again and again
 type StringVoid = (val: string) => void;
-// type NumVoid = (val: number) => void;
 
 type Store = {
   searchParams: SearchParams;
@@ -23,6 +23,7 @@ type Store = {
   addYear: StringVoid;
   addPrice: StringVoid;
   addCustom: StringVoid;
+  addWheel: StringVoid;
 };
 
 const useStore = create<Store>((set) => ({
@@ -34,6 +35,7 @@ const useStore = create<Store>((set) => ({
     year: "",
     price: "",
     fuelType: "",
+    wheel: "",
   },
   addManu: (manu) =>
     set((state) => ({
@@ -89,6 +91,14 @@ const useStore = create<Store>((set) => ({
       searchParams: {
         ...state.searchParams,
         fuelType: fuelType,
+      },
+    })),
+
+  addWheel: (wheel) =>
+    set((state) => ({
+      searchParams: {
+        ...state.searchParams,
+        wheel: wheel,
       },
     })),
 }));

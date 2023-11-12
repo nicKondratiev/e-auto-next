@@ -3,16 +3,17 @@ import Manu from "../../../components/dropdown/dropdown_components/Manu";
 import Models from "../../../components/dropdown/dropdown_components/Models";
 import Locations from "../../../components/dropdown/dropdown_components/Locations";
 import Year from "../../../components/dropdown/dropdown_components/year/Year";
+import Wheel from "../../../components/selectable/selectable_component/Wheel";
 
 export default function PrimaryFeatures() {
   return (
     <div className="flex h-[800px] w-full flex-col gap-3 rounded-lg bg-white">
-      <div className="flex gap-3 border-b border-gray-100 px-5 py-8">
+      <div className="flex gap-3 py-8">
         <ListAltIcon fontSize="medium" />
         <h3>Primary Features</h3>
       </div>
 
-      <div className="flex w-full justify-center">
+      <div className="flex w-full justify-center border-t  py-8">
         <div className="grid grid-rows-2 gap-4">
           <div className="flex gap-6">
             <Manu />
@@ -23,6 +24,10 @@ export default function PrimaryFeatures() {
             <Year />
           </div>
         </div>
+      </div>
+
+      <div>
+        <Wheel />
       </div>
     </div>
   );
