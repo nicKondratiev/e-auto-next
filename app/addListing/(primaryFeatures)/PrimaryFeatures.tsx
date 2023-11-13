@@ -1,3 +1,5 @@
+import "./styles.css";
+
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import Manu from "../../../components/dropdown/dropdown_components/Manu";
 import Models from "../../../components/dropdown/dropdown_components/Models";
@@ -9,37 +11,45 @@ import Fuel from "../../../components/selectable/selectable_component/Fuel";
 import Clearance from "../../../components/dropdown/dropdown_components/clearance/Clearance";
 import Mileage from "../../../components/selectable/selectable_component/Mileage";
 
+// this array of objects will be itterated over, so same code repetition will be avoided
+let dropDown_Couples: Record<"left" | "right", React.ReactElement>[] = [
+  {
+    left: <Manu />,
+    right: <Models />,
+  },
+  {
+    left: <Locations />,
+    right: <Year />,
+  },
+  {
+    left: <Clearance />,
+    right: <Mileage />,
+  },
+];
+
 export default function PrimaryFeatures() {
   return (
-    <div className="flex h-[800px] w-full flex-col gap-3 rounded-lg bg-white">
-      <div className="flex gap-3 py-8">
+    <div className="flex h-auto w-full flex-col gap-3 rounded-lg bg-white p-8">
+      <div className="flex h-full items-center gap-3">
         <ListAltIcon fontSize="medium" />
         <h3>Primary Features</h3>
       </div>
 
-      <div className="px-10">
-        <div className="flex w-full justify-center border-t py-8">
-          <div className="grid grid-rows-2 gap-4">
-            <div className="flex gap-6">
-              <Manu />
-              <Models />
+      <div className="flex justify-center border-t py-8">
+        <div className="flex w-full flex-col gap-4">
+          {dropDown_Couples.map((couple, index) => (
+            <div key={index} className="dropdown-flex">
+              {couple.left}
+              {couple.right}
             </div>
-            <div className="flex gap-6">
-              <Locations />
-              <Year />
-            </div>
-            <div className="flex gap-6">
-              <Clearance />
-              <Mileage />
-            </div>
-          </div>
+          ))}
         </div>
+      </div>
 
-        <div className="flex flex-col gap-6">
-          <Wheel />
-          <Transmission />
-          <Fuel />
-        </div>
+      <div className="flex flex-col gap-6">
+        <Wheel />
+        <Transmission />
+        <Fuel />
       </div>
     </div>
   );
