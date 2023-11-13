@@ -1,5 +1,7 @@
 import "./styles.css";
 
+import { rootContainerStyles } from "../page";
+
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import Manu from "../../../components/dropdown/dropdown_components/Manu";
 import Models from "../../../components/dropdown/dropdown_components/Models";
@@ -29,7 +31,7 @@ let dropDown_Couples: Record<"left" | "right", React.ReactElement>[] = [
 
 export default function PrimaryFeatures() {
   return (
-    <div className="flex h-auto w-full flex-col gap-3 rounded-lg bg-white p-8">
+    <div className={rootContainerStyles}>
       <div className="flex h-full items-center gap-3">
         <ListAltIcon fontSize="medium" />
         <h3>Primary Features</h3>
