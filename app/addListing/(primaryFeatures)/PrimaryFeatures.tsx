@@ -12,6 +12,7 @@ import Transmission from "../../../components/selectable/selectable_component/Tr
 import Fuel from "../../../components/selectable/selectable_component/Fuel";
 import Clearance from "../../../components/dropdown/dropdown_components/clearance/Clearance";
 import Mileage from "../../../components/selectable/selectable_component/Mileage";
+import SectionHeader from "../../../components/SectionHeader";
 
 // this array of objects will be itterated over, so same code repetition will be avoided
 let dropDown_Couples: Record<"left" | "right", React.ReactElement>[] = [
@@ -32,12 +33,12 @@ let dropDown_Couples: Record<"left" | "right", React.ReactElement>[] = [
 export default function PrimaryFeatures() {
   return (
     <div className={rootContainerStyles}>
-      <div className="flex h-full items-center gap-3">
+      <SectionHeader>
         <ListAltIcon fontSize="medium" />
         <h3>Primary Features</h3>
-      </div>
+      </SectionHeader>
 
-      <div className="flex justify-center border-t py-8">
+      <div className="flex justify-center">
         <div className="flex w-full flex-col gap-4">
           {dropDown_Couples.map((couple, index) => (
             <div key={index} className="dropdown-flex">
