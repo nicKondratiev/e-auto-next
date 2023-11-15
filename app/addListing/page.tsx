@@ -1,4 +1,5 @@
 import Photo from "./(Photo)/Photo";
+import Price from "./(Price)/Price";
 import PrimaryFeatures from "./(primaryFeatures)/PrimaryFeatures";
 
 export const rootContainerStyles: string =
@@ -9,6 +10,7 @@ export default function AddListing() {
     <div className="flex flex-col gap-5">
       <PrimaryFeatures />
       <Photo />
+      <Price />
     </div>
   );
 }

@@ -24,7 +24,6 @@ const Models = () => {
 
   const models = chosenManu[0]?.models || [];
 
-  console.log(models);
   return (
     <DropDown
       header="Models"
