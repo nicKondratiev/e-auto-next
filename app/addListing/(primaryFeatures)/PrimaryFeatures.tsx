@@ -33,7 +33,7 @@ let dropDown_Couples: Record<"left" | "right", React.ReactElement>[] = [
 export default function PrimaryFeatures() {
   return (
     <div className={rootContainerStyles}>
-      <SectionHeader>
+      <SectionHeader count={1} total={9}>
         <ListAltIcon fontSize="medium" />
         <h3>Primary Features</h3>
       </SectionHeader>

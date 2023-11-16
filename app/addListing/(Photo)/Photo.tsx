@@ -7,7 +7,7 @@ import PhotoIcon from "@mui/icons-material/Photo";
 export default function Photo() {
   return (
     <div className={rootContainerStyles}>
-      <SectionHeader>
+      <SectionHeader count={0} total={1}>
         <PhotoIcon fontSize="medium" />
         <h3>Photo</h3>
       </SectionHeader>

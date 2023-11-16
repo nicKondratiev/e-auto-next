@@ -8,7 +8,7 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 export default function Price() {
   return (
     <div className={rootContainerStyles}>
-      <SectionHeader>
+      <SectionHeader count={0} total={1}>
         <PaymentsIcon fontSize="medium" />
         <h3>Price</h3>
       </SectionHeader>
