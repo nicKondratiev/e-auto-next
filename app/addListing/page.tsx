@@ -1,6 +1,7 @@
+import PrimaryFeatures from "./(primaryFeatures)/PrimaryFeatures";
 import Photo from "./(Photo)/Photo";
 import Price from "./(Price)/Price";
-import PrimaryFeatures from "./(primaryFeatures)/PrimaryFeatures";
+import Publish from "./(publish)/Publish";
 
 export const rootContainerStyles: string =
   "flex h-auto w-full flex-col gap-8 rounded-lg bg-white p-8";
@@ -11,6 +12,7 @@ export default function AddListing() {
       <PrimaryFeatures />
       <Photo />
       <Price />
+      <Publish />
     </div>
   );
 }
