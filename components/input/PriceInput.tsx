@@ -47,8 +47,6 @@ export default function PriceInput() {
     }
   };
 
-  console.log(inputRef);
-
   return (
     <div
       ref={inputDivRef}
