@@ -11,6 +11,7 @@ type SearchParams = {
   wheel: string;
   transmission: string;
   mileage: string;
+  img: string;
 };
 
 // we create this types to avoid writing same types again and again
@@ -28,6 +29,7 @@ type Store = {
   addWheel: StringVoid;
   addTransmission: StringVoid;
   addMileage: StringVoid;
+  addImage: StringVoid;
 };
 
 const useStore = create<Store>((set) => ({
@@ -42,6 +44,7 @@ const useStore = create<Store>((set) => ({
     wheel: "",
     transmission: "",
     mileage: "",
+    img: "",
   },
   addManu: (manu) =>
     set((state) => ({
@@ -123,6 +126,15 @@ const useStore = create<Store>((set) => ({
         mileage: mileage,
       },
     })),
+
+  addImage: (img) => {
+    set((state) => ({
+      searchParams: {
+        ...state.searchParams,
+        img: img,
+      },
+    }));
+  },
 }));
 
 export default useStore;

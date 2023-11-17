@@ -2,16 +2,14 @@ import FilledCounter from "./FilledCounter";
 
 const SectionHeader = ({
   children,
-  count,
-  total,
+  filledCounter,
 }: {
   children: React.ReactNode;
-  count: number;
-  total: number;
+  filledCounter: React.ReactNode;
 }) => (
   <div className="flex items-center justify-between">
     <div className="flex gap-3">{children}</div>
-    <FilledCounter count={count} total={total} />
+    {filledCounter}
   </div>
 );
 

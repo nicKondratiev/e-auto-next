@@ -4,11 +4,12 @@ import PriceInput from "../../../components/input/PriceInput";
 import { rootContainerStyles } from "../page";
 
 import PaymentsIcon from "@mui/icons-material/Payments";
+import PriceFilledCounter from "./PriceFilledCounter";
 
 export default function Price() {
   return (
     <div className={rootContainerStyles}>
-      <SectionHeader count={0} total={1}>
+      <SectionHeader filledCounter={<PriceFilledCounter />}>
         <PaymentsIcon fontSize="medium" />
         <h3>Price</h3>
       </SectionHeader>
