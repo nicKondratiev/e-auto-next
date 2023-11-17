@@ -17,7 +17,7 @@ export default function Mileage() {
   };
 
   return (
-    <div className="w-[350px]">
+    <div className="w-full">
       <input
         ref={inputRef}
         placeholder="Mileage"

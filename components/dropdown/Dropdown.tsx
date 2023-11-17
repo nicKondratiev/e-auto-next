@@ -64,7 +64,7 @@ const DropDown = ({
   };
 
   return (
-    <div ref={dropdownRef} className="relative flex w-full lg:w-fit">
+    <div ref={dropdownRef} className="relative flex w-full">
       {isOpen && (
         <div className="overlay md:hidden" onClick={closeDropdown}></div>
       )}
@@ -76,7 +76,7 @@ const DropDown = ({
         } // we have to check data truthiness because we don't want to open models dropdown before we have manu selected
         className={`${
           !canOpen ? "border-1 bg-gray-100 text-gray-300" : ""
-        } dropdown-outter flex w-full overflow-hidden lg:w-[350px]`}
+        } dropdown-outter flex w-full overflow-hidden lg:w-full`}
       >
         <div className="relative flex h-auto flex-col justify-center">
           <span
