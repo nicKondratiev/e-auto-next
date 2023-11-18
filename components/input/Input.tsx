@@ -1,26 +1,29 @@
 "use client";
 
+import "./styles.css";
+
 import { useEffect, useState, useRef, ChangeEvent } from "react";
 
-import useStore from "../../app/store";
+type InputProps = {
+  setValue: (val: string) => void;
+  value: string;
+  placeholder: string;
+};
 
-export default function PriceInput() {
-  const store = useStore();
-
+export default function Input({ setValue, value, placeholder }: InputProps) {
   const [isActive, setIsActive] = useState(false);
 
   const inputDivRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // we need this price setter function so we won't have invalid prices like $000123
-  const priceSetter = (e: ChangeEvent<HTMLInputElement>) => {
+  const valueSetter = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
     const sanitizedValue = inputValue.startsWith("0")
       ? inputValue.substring(1)
       : inputValue;
 
-    store.addPrice(sanitizedValue);
+    setValue(sanitizedValue);
   };
 
   useEffect(() => {
@@ -51,22 +54,22 @@ export default function PriceInput() {
     <div
       ref={inputDivRef}
       onClick={() => handleLabelClick()}
-      className="relative flex h-[60px] w-full items-center overflow-hidden rounded-lg border"
+      className="relative flex h-full w-full items-center overflow-hidden rounded-lg border"
     >
       <input
         type="number"
         ref={inputRef}
-        value={store.searchParams.price}
-        onChange={(e) => priceSetter(e)}
+        value={value}
+        onChange={(e) => valueSetter(e)}
         onWheel={(e) => (e.target as HTMLInputElement).blur()}
         className={`h-full w-full px-2 text-sm focus:outline-none`}
       />
       <label
         className={`${
-          isActive || store.searchParams.price ? "-translate-y-5 text-xs" : ""
+          isActive || value ? "top-[2px] text-xs" : "top-1/2 -translate-y-1/2"
         } absolute cursor-text px-2 text-sm text-gray-400 duration-200`}
       >
-        Enter the price
+        {placeholder}
       </label>
     </div>
   );

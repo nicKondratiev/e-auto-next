@@ -1,10 +1,10 @@
 import SectionHeader from "../../../components/SectionHeader";
-import PriceInput from "../../../components/input/PriceInput";
 
 import { rootContainerStyles } from "../page";
 
 import PaymentsIcon from "@mui/icons-material/Payments";
 import PriceFilledCounter from "./PriceFilledCounter";
+import PriceInput from "./PriceInput";
 
 export default function Price() {
   return (
@@ -14,7 +14,7 @@ export default function Price() {
         <h3>Price</h3>
       </SectionHeader>
 
-      <div className="h-full w-full">
+      <div className="h-[60px] w-full">
         <PriceInput />
       </div>
     </div>
