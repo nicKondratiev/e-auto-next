@@ -4,7 +4,7 @@ import FilledCounter from "../../../components/FilledCounter";
 
 import useStore from "../../store";
 
-import { countTruthyValues } from "../../utils/countTruthyValues";
+import { countTruthyValues } from "../../../utils/countTruthyValues";
 
 export default function PriceFilledCounter() {
   const { searchParams } = useStore();

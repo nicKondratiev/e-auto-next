@@ -3,7 +3,7 @@
 import useStore from "../../store";
 
 import Button from "../../../components/button/Button";
-import { countTruthyValues } from "../../utils/countTruthyValues";
+import { countTruthyValues } from "../../../utils/countTruthyValues";
 
 export default function PublishButton() {
   const { searchParams } = useStore();
@@ -21,8 +21,6 @@ export default function PublishButton() {
     searchParams.wheel,
     searchParams.year,
   ]);
-
-  console.log(truthyParamsCount);
 
   return (
     <div>

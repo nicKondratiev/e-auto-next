@@ -2,7 +2,7 @@
 
 import FilledCounter from "../../../components/FilledCounter";
 
-import { countTruthyValues } from "../../utils/countTruthyValues";
+import { countTruthyValues } from "../../../utils/countTruthyValues";
 
 import useStore from "../../store";
 
