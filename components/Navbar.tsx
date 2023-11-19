@@ -7,7 +7,7 @@ export default function Navbar() {
       <Link href={"/listings"}>Listings</Link>
       <Link
         className="rounded-lg bg-red-500 px-2 py-1 duration-200 hover:bg-red-600"
-        href={"/addListing"}
+        href={"/add"}
       >
         Add Listing
       </Link>
