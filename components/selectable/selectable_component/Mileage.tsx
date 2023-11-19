@@ -9,7 +9,7 @@ export default function Mileage() {
 
   return (
     <Input
-      value={store.searchParams.mileage}
+      value={store.inputFields.mileage}
       setValue={store.addMileage}
       placeholder="Mileage"
     />

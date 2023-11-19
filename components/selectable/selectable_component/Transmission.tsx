@@ -12,7 +12,7 @@ export default function Transmission() {
   return (
     <Selectable
       header="Transmission"
-      item={store.searchParams.transmission}
+      item={store.inputFields.transmission}
       setItem={store.addTransmission}
       data={transmissionData}
     />

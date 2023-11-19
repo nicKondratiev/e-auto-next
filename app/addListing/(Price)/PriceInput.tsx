@@ -9,7 +9,7 @@ export default function PriceInput() {
 
   return (
     <Input
-      value={store.searchParams.price}
+      value={store.inputFields.price}
       setValue={store.addPrice}
       placeholder="Enter price"
     />

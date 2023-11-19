@@ -9,12 +9,12 @@ const fuelData = ["Petrol", "Diesel", "Electric", "Hybrid", "Plug-in Hybrid"];
 export default function Fuel() {
   const store = useStore();
 
-  console.log(store.searchParams.fuelType);
+  console.log(store.inputFields.fuelType);
 
   return (
     <Selectable
       header="Fuel type"
-      item={store.searchParams.fuelType}
+      item={store.inputFields.fuelType}
       setItem={store.addFuelType}
       data={fuelData}
     />

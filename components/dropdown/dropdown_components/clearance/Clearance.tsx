@@ -14,7 +14,7 @@ export default function Clearance() {
   // custom clearance setter function [1 === customs cleared, 0 === not cleared]
   const setCustom = (val: "1" | "0") => {
     // if search custom value equals to already setted custom value then it will be removed
-    if (val === store.searchParams.custom) {
+    if (val === store.inputFields.custom) {
       store.addCustom("");
     } else {
       store.addCustom(val);
@@ -26,14 +26,14 @@ export default function Clearance() {
       <ClearanceButton
         value="Cleared"
         onClick={() => setCustom("0")}
-        selected={store.searchParams.custom === "0"}
+        selected={store.inputFields.custom === "0"}
         side="left"
       />
       <div className="absolute z-20 h-8 w-[1px] rounded-full bg-gray-200"></div>
       <ClearanceButton
         value="Duty Free"
         onClick={() => setCustom("1")}
-        selected={store.searchParams.custom === "1"}
+        selected={store.inputFields.custom === "1"}
         side="right"
       />
     </div>

@@ -7,8 +7,8 @@ import useStore from "../../store";
 import { countTruthyValues } from "../../../utils/countTruthyValues";
 
 export default function PriceFilledCounter() {
-  const { searchParams } = useStore();
+  const { inputFields } = useStore();
 
-  const truthyParamsCount = countTruthyValues([searchParams.price]);
-  return <FilledCounter count={truthyParamsCount} total={1} />;
+  const truthyFieldsCount = countTruthyValues([inputFields.price]);
+  return <FilledCounter count={truthyFieldsCount} total={1} />;
 }

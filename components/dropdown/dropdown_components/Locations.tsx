@@ -23,7 +23,7 @@ const Locations = () => {
     <DropDown
       header="Location"
       canOpen={true}
-      item={store.searchParams.location}
+      item={store.inputFields.location}
       setItem={store.addLocation}
       inputVal={inputVal}
       setInputVal={setInputVal}
@@ -32,7 +32,7 @@ const Locations = () => {
           data={locations}
           setItem={store.addLocation}
           inputVal={inputVal}
-          item={store.searchParams.location}
+          item={store.inputFields.location}
         />
       }
     />

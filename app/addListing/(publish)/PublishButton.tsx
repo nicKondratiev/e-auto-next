@@ -6,25 +6,25 @@ import Button from "../../../components/button/Button";
 import { countTruthyValues } from "../../../utils/countTruthyValues";
 
 export default function PublishButton() {
-  const { searchParams } = useStore();
+  const { inputFields } = useStore();
 
-  const truthyParamsCount = countTruthyValues([
-    searchParams.custom,
-    searchParams.fuelType,
-    searchParams.img,
-    searchParams.location,
-    searchParams.manu,
-    searchParams.mileage,
-    searchParams.model,
-    searchParams.price,
-    searchParams.transmission,
-    searchParams.wheel,
-    searchParams.year,
+  const truthyFieldsCount = countTruthyValues([
+    inputFields.custom,
+    inputFields.fuelType,
+    inputFields.img,
+    inputFields.location,
+    inputFields.manu,
+    inputFields.mileage,
+    inputFields.model,
+    inputFields.price,
+    inputFields.transmission,
+    inputFields.wheel,
+    inputFields.year,
   ]);
 
   return (
     <div>
-      <Button disabled={truthyParamsCount !== 11} />
+      <Button disabled={truthyFieldsCount !== 11} />
     </div>
   );
 }

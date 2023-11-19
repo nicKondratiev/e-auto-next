@@ -30,11 +30,11 @@ export default function Manu() {
         <Child
           data={manufacturers}
           inputVal={inputVal}
-          item={store.searchParams.manu}
+          item={store.inputFields.manu}
           setItem={store.addManu}
         />
       }
-      item={store.searchParams.manu}
+      item={store.inputFields.manu}
     />
   );
 }

@@ -16,12 +16,12 @@ function Year() {
   return (
     <DropDown
       header="Year"
-      item={store.searchParams.year}
+      item={store.inputFields.year}
       canOpen={true}
       inputVal={inputVal}
       setInputVal={setInputVal}
       setItem={store.addYear}
-      Child={<YearChild item={store.searchParams.year} />}
+      Child={<YearChild item={store.inputFields.year} />}
     />
   );
 }

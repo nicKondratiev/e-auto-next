@@ -9,12 +9,12 @@ const wheelData = ["Left", "Right"];
 export default function Wheel() {
   const store = useStore();
 
-  console.log(store.searchParams.wheel);
+  console.log(store.inputFields.wheel);
 
   return (
     <Selectable
       header="Wheel"
-      item={store.searchParams.wheel}
+      item={store.inputFields.wheel}
       setItem={store.addWheel}
       data={wheelData}
     />

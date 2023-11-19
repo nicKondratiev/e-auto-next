@@ -7,19 +7,19 @@ import { countTruthyValues } from "../../../utils/countTruthyValues";
 import useStore from "../../store";
 
 export default function Filled() {
-  const { searchParams } = useStore();
+  const { inputFields } = useStore();
 
-  const truthyParamsCount = countTruthyValues([
-    searchParams.manu,
-    searchParams.model,
-    searchParams.location,
-    searchParams.year,
-    searchParams.custom,
-    searchParams.mileage,
-    searchParams.wheel,
-    searchParams.transmission,
-    searchParams.fuelType,
+  const truthyFieldsCount = countTruthyValues([
+    inputFields.manu,
+    inputFields.model,
+    inputFields.location,
+    inputFields.year,
+    inputFields.custom,
+    inputFields.mileage,
+    inputFields.wheel,
+    inputFields.transmission,
+    inputFields.fuelType,
   ]);
 
-  return <FilledCounter count={truthyParamsCount} total={9} />;
+  return <FilledCounter count={truthyFieldsCount} total={9} />;
 }

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type SearchParams = {
+type InputFields = {
   manu: string;
   model: string;
   location: string;
@@ -18,7 +18,7 @@ type SearchParams = {
 type StringVoid = (val: string) => void;
 
 type Store = {
-  searchParams: SearchParams;
+  inputFields: InputFields;
   addManu: StringVoid;
   addModel: StringVoid;
   addLocation: StringVoid;
@@ -33,7 +33,7 @@ type Store = {
 };
 
 const useStore = create<Store>((set) => ({
-  searchParams: {
+  inputFields: {
     manu: "",
     model: "",
     location: "",
@@ -48,8 +48,8 @@ const useStore = create<Store>((set) => ({
   },
   addManu: (manu) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         manu: manu,
         model: "",
       },
@@ -57,80 +57,80 @@ const useStore = create<Store>((set) => ({
 
   addModel: (model) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         model: model,
       },
     })),
 
   addLocation: (location) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         location: location,
       },
     })),
 
   addCustom: (custom) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         custom: custom,
       },
     })),
 
   addYear: (year) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         year: year,
       },
     })),
 
   addPrice: (price) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         price: price,
       },
     })),
 
   addFuelType: (fuelType) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         fuelType: fuelType,
       },
     })),
 
   addWheel: (wheel) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         wheel: wheel,
       },
     })),
 
   addTransmission: (transmission) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         transmission: transmission,
       },
     })),
 
   addMileage: (mileage) =>
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         mileage: mileage,
       },
     })),
 
   addImage: (img) => {
     set((state) => ({
-      searchParams: {
-        ...state.searchParams,
+      inputFields: {
+        ...state.inputFields,
         img: img,
       },
     }));

@@ -19,7 +19,7 @@ const Models = () => {
 
   // filter carsData so it will only show models of selected manufacturer
   const chosenManu = carsData.filter(
-    (car) => car.brand === store.searchParams.manu
+    (car) => car.brand === store.inputFields.manu
   );
 
   const models = chosenManu[0]?.models || [];
@@ -27,7 +27,7 @@ const Models = () => {
   return (
     <DropDown
       header="Models"
-      item={store.searchParams.model}
+      item={store.inputFields.model}
       inputVal={inputVal}
       setInputVal={setInputVal}
       canOpen={Boolean(models[0])}
@@ -37,7 +37,7 @@ const Models = () => {
           data={models}
           setItem={store.addModel}
           inputVal={inputVal}
-          item={store.searchParams.model}
+          item={store.inputFields.model}
         />
       }
     />
