@@ -19,6 +19,8 @@ type StringVoid = (val: string) => void;
 
 type Store = {
   inputFields: InputFields;
+  isFormSubmitted: boolean;
+  setFormSubmitted: () => void;
   addManu: StringVoid;
   addModel: StringVoid;
   addLocation: StringVoid;
@@ -46,6 +48,8 @@ const useStore = create<Store>((set) => ({
     mileage: "",
     img: "",
   },
+  isFormSubmitted: false,
+  setFormSubmitted: () => set({ isFormSubmitted: true }),
   addManu: (manu) =>
     set((state) => ({
       inputFields: {
