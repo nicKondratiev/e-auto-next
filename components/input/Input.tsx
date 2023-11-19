@@ -4,6 +4,8 @@ import "./styles.css";
 
 import { useEffect, useState, useRef, ChangeEvent } from "react";
 
+import useStore from "../../app/store";
+
 type InputProps = {
   setValue: (val: string) => void;
   value: string;
@@ -11,6 +13,8 @@ type InputProps = {
 };
 
 export default function Input({ setValue, value, placeholder }: InputProps) {
+  const { isFormSubmitted } = useStore();
+
   const [isActive, setIsActive] = useState(false);
 
   const inputDivRef = useRef<HTMLDivElement>(null);
@@ -54,7 +58,9 @@ export default function Input({ setValue, value, placeholder }: InputProps) {
     <div
       ref={inputDivRef}
       onClick={() => handleLabelClick()}
-      className="relative flex h-full w-full items-center overflow-hidden rounded-lg border"
+      className={`${
+        isFormSubmitted && !value ? "border-red-300" : ""
+      } relative flex h-full w-full items-center overflow-hidden rounded-lg border`}
     >
       <input
         type="number"

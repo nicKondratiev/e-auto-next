@@ -3,11 +3,11 @@
 }
 
 .left {
-  @apply border-l-[1px] border-y-[1px] rounded-l-lg;
+  @apply rounded-l-lg;
 }
 
 .right {
-  @apply border-r-[1px] border-y-[1px] rounded-r-lg;
+  @apply rounded-r-lg;
 }
 
 .selected {

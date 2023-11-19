@@ -5,6 +5,8 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { SetStateAction, Dispatch } from "react";
 
+import useStore from "../../app/store";
+
 import "./styles.css";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -12,7 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 type DropDownProps = {
   header: string;
-  item: string | number;
+  item: string;
   inputVal: string;
   setInputVal: Dispatch<SetStateAction<string>>;
   canOpen: boolean;
@@ -29,8 +31,9 @@ const DropDown = ({
   setItem,
   canOpen,
 }: DropDownProps) => {
+  const { isFormSubmitted } = useStore();
+
   const [isOpen, setIsOpen] = useState(false);
-  // const [inputVal, setInputVal] = useState<string | number>("");
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLSpanElement | null>(null);
 
@@ -63,6 +66,8 @@ const DropDown = ({
     setInputVal("");
   };
 
+  console.log(item);
+
   return (
     <div ref={dropdownRef} className="relative flex w-full">
       {isOpen && (
@@ -74,8 +79,8 @@ const DropDown = ({
             ? toggleDropdown()
             : () => null
         } // we have to check data truthiness because we don't want to open models dropdown before we have manu selected
-        className={`${
-          !canOpen ? "border-1 bg-gray-100 text-gray-300" : ""
+        className={`${!canOpen ? "border-1 bg-gray-100 text-gray-300" : ""} ${
+          isFormSubmitted && !item ? "border-red-300" : ""
         } dropdown-outter flex w-full overflow-hidden lg:w-full`}
       >
         <div className="relative flex h-auto flex-col justify-center">

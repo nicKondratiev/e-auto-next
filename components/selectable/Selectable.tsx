@@ -1,5 +1,7 @@
 "use client";
 
+import useStore from "../../app/store";
+
 type SelectableProps = {
   header: string;
   item: string;
@@ -13,9 +15,13 @@ export default function Selectable({
   setItem,
   data,
 }: SelectableProps) {
+  const { isFormSubmitted } = useStore();
+
   return (
     <div className="flex flex-col gap-3">
-      <h1>{header}</h1>
+      <h1 className={`${isFormSubmitted && !item ? "text-red-400" : ""}`}>
+        {header}
+      </h1>
       <div className="flex  gap-2">
         {data.map((val, index) => (
           <span

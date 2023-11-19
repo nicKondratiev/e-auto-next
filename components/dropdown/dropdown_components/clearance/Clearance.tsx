@@ -22,7 +22,13 @@ export default function Clearance() {
   };
 
   return (
-    <div className="flex w-full items-center justify-center rounded-lg">
+    <div
+      className={`${
+        store.isFormSubmitted && !store.inputFields.custom
+          ? "border-red-300"
+          : ""
+      } flex w-full items-center justify-center rounded-lg border`}
+    >
       <ClearanceButton
         value="Cleared"
         onClick={() => setCustom("0")}
