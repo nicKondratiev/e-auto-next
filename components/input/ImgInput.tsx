@@ -5,7 +5,7 @@ import useStore from "../../app/store";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
 
 export default function ImgInput() {
-  const { addImage, inputFields, isFormSubmitted } = useStore();
+  const { updateField, inputFields, isFormSubmitted } = useStore();
 
   return (
     <div
@@ -20,7 +20,7 @@ export default function ImgInput() {
       </span>
       <input
         type="text"
-        onChange={(e) => addImage(e.target.value)}
+        onChange={(e) => updateField("img", e.target.value)}
         placeholder="e.g. https://car-image/manufacturer"
         className="w-full text-sm font-medium text-gray-700 placeholder:font-normal focus:outline-none"
       />

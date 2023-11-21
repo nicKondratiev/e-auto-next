@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import useStore from "../../app/store";
 
 export default function Button({ disabled }: { disabled: boolean }) {
-  const { setFormSubmitted } = useStore();
+  const { setFormSubmitted, reset, inputFields } = useStore();
 
   const router = useRouter();
 
@@ -13,6 +13,7 @@ export default function Button({ disabled }: { disabled: boolean }) {
     if (!disabled) {
       router.push("listings");
       setFormSubmitted();
+      reset();
     } else {
       setFormSubmitted();
     }

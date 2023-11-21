@@ -1,40 +1,21 @@
 "use client";
 
-import { useState } from "react";
-
 // reusables
 import DropDown from "../Dropdown";
 import Child from "../Child";
-
-// zustand store
-import useStore from "../../../app/store";
 
 // json data
 import carsData from "../../../app/json/carsData.json";
 
 export default function Manu() {
-  const store = useStore();
-
   const manufacturers = carsData.map((car) => car.brand);
-
-  const [inputVal, setInputVal] = useState<string>("");
 
   return (
     <DropDown
-      canOpen={true}
       header="Manufacturer"
-      inputVal={inputVal}
-      setInputVal={setInputVal}
-      setItem={store.addManu}
-      Child={
-        <Child
-          data={manufacturers}
-          inputVal={inputVal}
-          item={store.inputFields.manu}
-          setItem={store.addManu}
-        />
-      }
-      item={store.inputFields.manu}
+      name="manu"
+      canOpen={true}
+      Child={<Child data={manufacturers} name="manu" />}
     />
   );
 }

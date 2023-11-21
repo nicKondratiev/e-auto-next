@@ -7,15 +7,13 @@ import useStore from "../../../app/store";
 const fuelData = ["Petrol", "Diesel", "Electric", "Hybrid", "Plug-in Hybrid"];
 
 export default function Fuel() {
-  const store = useStore();
-
-  console.log(store.inputFields.fuelType);
+  const { inputFields } = useStore();
 
   return (
     <Selectable
       header="Fuel type"
-      item={store.inputFields.fuelType}
-      setItem={store.addFuelType}
+      name="fuelType"
+      item={inputFields.fuelType}
       data={fuelData}
     />
   );

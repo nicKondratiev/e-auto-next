@@ -48,8 +48,6 @@ const DropDown = ({ header, Child, name, canOpen }: DropDownProps) => {
     };
   }, []);
 
-  console.log(inputFields[name]);
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };

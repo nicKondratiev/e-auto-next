@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 // reusables
 import Child from "../Child";
 import DropDown from "../Dropdown";
@@ -11,35 +9,27 @@ import carsData from "../../../app/json/carsData.json";
 
 // useStore from zustand
 import useStore from "../../../app/store";
+import { useEffect } from "react";
 
 const Models = () => {
-  const store = useStore();
-
-  const [inputVal, setInputVal] = useState<string>("");
+  const { inputFields, updateField } = useStore();
 
   // filter carsData so it will only show models of selected manufacturer
-  const chosenManu = carsData.filter(
-    (car) => car.brand === store.inputFields.manu
-  );
-
+  const chosenManu = carsData.filter((car) => car.brand === inputFields.manu);
   const models = chosenManu[0]?.models || [];
+
+  useEffect(() => {
+    if (!inputFields.manu) {
+      updateField("model", "");
+    }
+  }, [inputFields.manu, updateField]);
 
   return (
     <DropDown
       header="Models"
-      item={store.inputFields.model}
-      inputVal={inputVal}
-      setInputVal={setInputVal}
+      name="model"
       canOpen={Boolean(models[0])}
-      setItem={store.addModel}
-      Child={
-        <Child
-          data={models}
-          setItem={store.addModel}
-          inputVal={inputVal}
-          item={store.inputFields.model}
-        />
-      }
+      Child={<Child data={models} name="model" />}
     />
   );
 };

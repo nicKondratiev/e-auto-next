@@ -1,21 +1,21 @@
 "use client";
 
-import useStore from "../../app/store";
+import useStore, { InputFields } from "../../app/store";
 
 type SelectableProps = {
   header: string;
   item: string;
-  setItem: (val: string) => void;
+  name: keyof InputFields;
   data: string[];
 };
 
 export default function Selectable({
   header,
   item,
-  setItem,
+  name,
   data,
 }: SelectableProps) {
-  const { isFormSubmitted } = useStore();
+  const { isFormSubmitted, updateField } = useStore();
 
   return (
     <div className="flex flex-col gap-3">
@@ -25,7 +25,7 @@ export default function Selectable({
       <div className="flex  gap-2">
         {data.map((val, index) => (
           <span
-            onClick={() => setItem(val)}
+            onClick={() => updateField(name, val)}
             key={index}
             className={`${
               item === val ? "border-green-400 bg-green-100" : ""

@@ -7,13 +7,13 @@ import useStore from "../../../app/store";
 const transmissionData = ["Manual", "Automatic", "Tiptronic"];
 
 export default function Transmission() {
-  const store = useStore();
+  const { inputFields } = useStore();
 
   return (
     <Selectable
       header="Transmission"
-      item={store.inputFields.transmission}
-      setItem={store.addTransmission}
+      name="transmission"
+      item={inputFields.transmission}
       data={transmissionData}
     />
   );

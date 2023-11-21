@@ -4,16 +4,16 @@ import "./styles.css";
 
 import { useEffect, useState, useRef, ChangeEvent } from "react";
 
-import useStore from "../../app/store";
+import useStore, { InputFields } from "../../app/store";
 
 type InputProps = {
-  setValue: (val: string) => void;
+  name: keyof InputFields;
   value: string;
   placeholder: string;
 };
 
-export default function Input({ setValue, value, placeholder }: InputProps) {
-  const { isFormSubmitted } = useStore();
+export default function Input({ name, value, placeholder }: InputProps) {
+  const { isFormSubmitted, updateField } = useStore();
 
   const [isActive, setIsActive] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Input({ setValue, value, placeholder }: InputProps) {
       ? inputValue.substring(1)
       : inputValue;
 
-    setValue(sanitizedValue);
+    updateField(name, sanitizedValue);
   };
 
   useEffect(() => {

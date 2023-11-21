@@ -1,22 +1,22 @@
+import { InputFields } from "../../app/store";
+
+import useStore from "../../app/store";
+
 type ChildProps = {
   data: string[];
-  inputVal: string;
-  setItem: (item: string) => void;
-  item: string;
+  name: keyof InputFields;
 };
 
 // Child.tsx receives data and setter function of different components like (manufacturer, models and etc)
-const Child = ({ data, inputVal, item, setItem }: ChildProps) => {
-  const itemSetter = (val: string) => {
-    setItem(val);
-  };
+const Child = ({ data, name }: ChildProps) => {
+  const { updateField, inputFields } = useStore();
+
+  const item = String(inputFields[name]);
 
   const filteredData =
-    data.indexOf(inputVal) !== -1
+    data.indexOf(item) !== -1
       ? data
-      : data.filter((val) =>
-          val.toLowerCase().startsWith(inputVal.toLowerCase())
-        );
+      : data.filter((val) => val.toLowerCase().startsWith(item.toLowerCase()));
 
   return (
     <div>
@@ -24,7 +24,7 @@ const Child = ({ data, inputVal, item, setItem }: ChildProps) => {
         {filteredData?.map((val, id) => (
           // we itterate over data and set item based on users selection
           <div
-            onClick={() => itemSetter(val)}
+            onClick={() => updateField(name, val)}
             className={`${
               item === val ? "bg-gray-100" : "bg-white"
             } flex cursor-pointer items-center px-5 py-2 text-black duration-150 ease-in hover:bg-gray-100`}

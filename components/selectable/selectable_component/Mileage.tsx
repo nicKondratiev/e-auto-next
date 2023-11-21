@@ -5,13 +5,9 @@ import Input from "../../input/Input";
 import useStore from "../../../app/store";
 
 export default function Mileage() {
-  const store = useStore();
+  const { inputFields } = useStore();
 
   return (
-    <Input
-      value={store.inputFields.mileage}
-      setValue={store.addMileage}
-      placeholder="Mileage"
-    />
+    <Input value={inputFields.mileage} name="mileage" placeholder="Mileage" />
   );
 }
