@@ -3,7 +3,7 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import React, { useState, useEffect, useRef } from "react";
 
-import { SetStateAction, Dispatch } from "react";
+import { InputFields } from "../../app/store";
 
 import useStore from "../../app/store";
 
@@ -14,28 +14,20 @@ import CloseIcon from "@mui/icons-material/Close";
 
 type DropDownProps = {
   header: string;
-  item: string;
-  inputVal: string;
-  setInputVal: Dispatch<SetStateAction<string>>;
+  name: keyof InputFields;
   canOpen: boolean;
-  setItem: (val: string) => void;
   Child: React.ReactNode;
 };
 
-const DropDown = ({
-  header,
-  Child,
-  item,
-  inputVal,
-  setInputVal,
-  setItem,
-  canOpen,
-}: DropDownProps) => {
-  const { isFormSubmitted } = useStore();
+const DropDown = ({ header, Child, name, canOpen }: DropDownProps) => {
+  const { isFormSubmitted, inputFields, updateField } = useStore();
+
+  const item = String(inputFields[name]);
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLSpanElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,17 +48,25 @@ const DropDown = ({
     };
   }, []);
 
+  console.log(inputFields[name]);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-    setInputVal("");
   };
 
   const closeDropdown = () => {
     setIsOpen(false);
-    setInputVal("");
   };
 
-  console.log(item);
+  const handleClickOutside = (event: any) => {
+    if (
+      canOpen &&
+      !inputRef.current?.contains(event.target as HTMLElement) &&
+      !closeButtonRef.current?.contains(event.target as HTMLElement)
+    ) {
+      toggleDropdown();
+    }
+  };
 
   return (
     <div ref={dropdownRef} className="relative flex w-full">
@@ -74,11 +74,7 @@ const DropDown = ({
         <div className="overlay md:hidden" onClick={closeDropdown}></div>
       )}
       <div
-        onClick={(event) =>
-          canOpen && !inputRef.current?.contains(event.target as HTMLElement) // we don't want to close dropdown if click occured on input element
-            ? toggleDropdown()
-            : () => null
-        } // we have to check data truthiness because we don't want to open models dropdown before we have manu selected
+        onClick={handleClickOutside}
         className={`${!canOpen ? "border-1 bg-gray-100 text-gray-300" : ""} ${
           isFormSubmitted && !item ? "border-red-300" : ""
         } dropdown-outter flex w-full overflow-hidden lg:w-full`}
@@ -101,13 +97,11 @@ const DropDown = ({
                   type="text"
                   className="dropdown-input"
                   autoFocus
-                  onChange={(e) => setInputVal(e.target.value)}
+                  onChange={(e) => updateField(name, e.target.value)}
                 />
               </span>
             )}
-            {!inputVal && (
-              <span className="absolute w-max cursor-auto">{item}</span>
-            )}
+            {item && <span className="absolute w-max cursor-auto">{item}</span>}
           </span>
         </div>
         <div className="rounded-full p-1.5 hover:bg-gray-100">
@@ -121,7 +115,12 @@ const DropDown = ({
               fontSize="small"
             />
           ) : (
-            <button onClick={() => setItem("")}>
+            <button
+              ref={closeButtonRef}
+              onClick={() => {
+                updateField(name, "");
+              }}
+            >
               <CloseIcon className="scale-75" fontSize="small" />
             </button>
           )}
