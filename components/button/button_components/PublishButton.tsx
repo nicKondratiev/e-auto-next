@@ -1,6 +1,6 @@
 "use client";
 
-import useStore from "../../store";
+import useStore from "../../../app/store";
 
 import Button from "../../../components/button/Button";
 import { countTruthyValues } from "../../../utils/countTruthyValues";

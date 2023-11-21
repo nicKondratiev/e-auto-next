@@ -7,11 +7,11 @@ import Manu from "../../../components/dropdown/dropdown_components/Manu";
 import Models from "../../../components/dropdown/dropdown_components/Models";
 import Locations from "../../../components/dropdown/dropdown_components/Locations";
 import Year from "../../../components/dropdown/dropdown_components/year/Year";
-import Wheel from "../../../components/selectable/selectable_component/Wheel";
-import Transmission from "../../../components/selectable/selectable_component/Transmission";
-import Fuel from "../../../components/selectable/selectable_component/Fuel";
+import Wheel from "../../../components/selectable/selectable_components/Wheel";
+import Transmission from "../../../components/selectable/selectable_components/Transmission";
+import Fuel from "../../../components/selectable/selectable_components/Fuel";
 import Clearance from "../../../components/dropdown/dropdown_components/clearance/Clearance";
-import Mileage from "../../../components/selectable/selectable_component/Mileage";
+import Mileage from "../../../components/selectable/selectable_components/Mileage";
 import SectionHeader from "../../../components/SectionHeader";
 
 import PrimaryFilledCounter from "./PrimaryFilledCounter";

@@ -4,7 +4,7 @@ import { rootContainerStyles } from "../page";
 
 import PaymentsIcon from "@mui/icons-material/Payments";
 import PriceFilledCounter from "./PriceFilledCounter";
-import PriceInput from "../../../components/input/PriceInput";
+import PriceInput from "../../../components/input/input_components/PriceInput";
 
 export default function Price() {
   return (

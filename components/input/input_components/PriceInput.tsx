@@ -1,8 +1,8 @@
 "use client";
 
-import Input from "./Input";
+import Input from "../Input";
 
-import useStore from "../../app/store";
+import useStore from "../../../app/store";
 
 export default function PriceInput() {
   const { inputFields } = useStore();
