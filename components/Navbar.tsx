@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="flex w-[800px] items-center gap-5 rounded-lg bg-slate-600 px-5 py-3 text-white">
+    <nav className="flex w-full items-center gap-5 rounded-lg bg-slate-600 px-5 py-3 text-white">
       <Link href={"/"}>Home</Link>
       <Link href={"/listings"}>Listings</Link>
       <Link
