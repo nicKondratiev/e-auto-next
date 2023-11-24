@@ -8,7 +8,7 @@ import PriceInput from "../../../components/input/input_components/PriceInput";
 
 export default function Price() {
   return (
-    <div className={rootContainerStyles}>
+    <div id="price-section" className={rootContainerStyles}>
       <SectionHeader filledCounter={<PriceFilledCounter />}>
         <PaymentsIcon fontSize="medium" />
         <h3>Price</h3>

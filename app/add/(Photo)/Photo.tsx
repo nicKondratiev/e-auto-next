@@ -7,7 +7,7 @@ import PhotoFilledCounter from "./PhotoFilledCounter";
 
 export default function Photo() {
   return (
-    <div className={rootContainerStyles}>
+    <div id="photo-section" className={rootContainerStyles}>
       <SectionHeader filledCounter={<PhotoFilledCounter />}>
         <PhotoIcon fontSize="medium" />
         <h3>Photo</h3>

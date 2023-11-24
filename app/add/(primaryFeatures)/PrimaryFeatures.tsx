@@ -34,7 +34,7 @@ let dropDown_Couples: Record<"left" | "right", React.ReactElement>[] = [
 
 export default function PrimaryFeatures() {
   return (
-    <div className={rootContainerStyles}>
+    <div id="primary-section" className={rootContainerStyles}>
       <SectionHeader filledCounter={<PrimaryFilledCounter />}>
         <ListAltIcon fontSize="medium" />
         <h3>Primary Features</h3>
