@@ -49,7 +49,7 @@ export default function SectionsNav() {
   ];
 
   return (
-    <div className="mx-3 my-4 flex h-[100px] flex-col justify-between rounded-lg bg-white">
+    <div className="flex h-[130px] w-[250px] flex-col justify-between rounded-lg bg-white px-3 py-4">
       {navItem.map((item, index) => (
         <Link
           key={index}
@@ -66,7 +66,7 @@ export default function SectionsNav() {
           } flex cursor-pointer flex-row items-center gap-2`}
         >
           <TripOriginIcon fontSize="small" />
-          <span className={`text-xs`}>{item.name}</span>
+          <span className={`text-sm`}>{item.name}</span>
         </Link>
       ))}
     </div>

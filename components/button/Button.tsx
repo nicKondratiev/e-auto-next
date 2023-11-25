@@ -22,7 +22,7 @@ export default function Button({ disabled }: { disabled: boolean }) {
   return (
     <button
       onClick={handleClick}
-      className="cursor-pointer rounded-lg bg-orange-600 px-8 py-3 text-sm text-white hover:bg-orange-700"
+      className="cursor-pointer rounded-lg bg-blue-500 px-8 py-3 text-sm text-white duration-200 hover:bg-blue-600"
     >
       Publish
     </button>

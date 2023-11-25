@@ -19,7 +19,11 @@ export default function Selectable({
 
   return (
     <div className="flex flex-col gap-3">
-      <h1 className={`${isFormSubmitted && !item ? "text-red-400" : ""}`}>
+      <h1
+        className={`${
+          isFormSubmitted && !item ? "text-red-400" : ""
+        } text-sm font-semibold`}
+      >
         {header}
       </h1>
       <div className="flex  gap-2">
