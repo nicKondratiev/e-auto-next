@@ -49,7 +49,7 @@ export default function SectionsNav() {
   ];
 
   return (
-    <div className="flex h-[130px] w-[250px] flex-col justify-between rounded-lg bg-white px-3 py-4">
+    <div className="flex h-[130px] w-full flex-col justify-between rounded-lg bg-white px-3 py-4">
       {navItem.map((item, index) => (
         <Link
           key={index}
