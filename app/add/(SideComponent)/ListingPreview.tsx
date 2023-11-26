@@ -24,8 +24,17 @@ export default function ListingPreview() {
 
   return (
     <div className="flex h-[280px] flex-col items-center justify-between rounded-lg bg-white p-4 text-xs font-semibold">
-      <div className="flex h-[140px] w-full items-center justify-center rounded-lg bg-gray-200">
-        <DriveEtaIcon fontSize="large" className="scale-125 text-gray-500" />
+      <div className="flex h-[140px] w-full items-center justify-center overflow-hidden rounded-lg bg-gray-200">
+        {inputFields.img ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            alt="carPreview"
+            src={inputFields.img}
+            className="h-full w-full object-cover object-center"
+          />
+        ) : (
+          <DriveEtaIcon fontSize="large" className="scale-125 text-gray-500" />
+        )}
       </div>
 
       <div className="flex h-fit w-full justify-between">

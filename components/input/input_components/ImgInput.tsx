@@ -3,12 +3,25 @@
 import { useRef } from "react";
 import useStore from "../../../app/store";
 
+import Image from "next/image";
+
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 export default function ImgInput() {
   const { updateField, inputFields, isFormSubmitted } = useStore();
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+
+    if (file) {
+      const imgURL = URL.createObjectURL(file);
+      updateField("img", imgURL);
+    }
+
+    console.log(file);
+  };
 
   return (
     <div
@@ -28,8 +41,8 @@ export default function ImgInput() {
       <input
         ref={inputRef}
         type="file"
-        accept="image/jpeg,image/png,image/heif,image/heic"
-        onChange={(e) => updateField("img", e.target.value)}
+        accept="image/jpeg,image/png,image/heif,image/heic, image/webp"
+        onChange={handleFileUpload}
         className="hidden"
       />
     </div>
