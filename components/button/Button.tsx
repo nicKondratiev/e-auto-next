@@ -4,13 +4,19 @@ import { useRouter } from "next/navigation";
 
 import useStore from "../../app/store";
 
-export default function Button({ disabled }: { disabled: boolean }) {
-  const { setFormSubmitted, reset, inputFields } = useStore();
+type ButtonProps = {
+  disabled: boolean;
+  makeApiCall?: () => Promise<void>;
+};
+
+export default function Button({ disabled, makeApiCall }: ButtonProps) {
+  const { setFormSubmitted, reset } = useStore();
 
   const router = useRouter();
 
   const handleClick = () => {
     if (!disabled) {
+      makeApiCall !== undefined && makeApiCall();
       router.push("listings");
       setFormSubmitted();
       reset();

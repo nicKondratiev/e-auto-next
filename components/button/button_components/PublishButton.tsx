@@ -8,6 +8,13 @@ import { countTruthyValues } from "../../../utils/countTruthyValues";
 export default function PublishButton() {
   const { inputFields } = useStore();
 
+  let makeApiCall = async () => {
+    await fetch("/api/cars", {
+      method: "POST",
+      body: JSON.stringify(inputFields),
+    });
+  };
+
   const truthyFieldsCount = countTruthyValues([
     inputFields.custom,
     inputFields.fuelType,
@@ -24,7 +31,7 @@ export default function PublishButton() {
 
   return (
     <div>
-      <Button disabled={truthyFieldsCount !== 11} />
+      <Button disabled={truthyFieldsCount !== 11} makeApiCall={makeApiCall} />
     </div>
   );
 }
