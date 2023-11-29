@@ -1,6 +1,6 @@
 "use client";
 
-import Input from "../../input/Input";
+import Input from "../Input";
 
 import useStore from "../../../app/store";
 

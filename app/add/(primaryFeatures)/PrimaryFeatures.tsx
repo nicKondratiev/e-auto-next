@@ -11,7 +11,7 @@ import Wheel from "../../../components/selectable/selectable_components/Wheel";
 import Transmission from "../../../components/selectable/selectable_components/Transmission";
 import Fuel from "../../../components/selectable/selectable_components/Fuel";
 import Clearance from "../../../components/dropdown/dropdown_components/clearance/Clearance";
-import Mileage from "../../../components/selectable/selectable_components/Mileage";
+import Mileage from "../../../components/input/input_components/Mileage";
 import SectionHeader from "../../../components/SectionHeader";
 
 import PrimaryFilledCounter from "./PrimaryFilledCounter";

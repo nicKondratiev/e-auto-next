@@ -21,7 +21,7 @@ export default function Input({ name, value, placeholder }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const valueSetter = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+    const inputValue = e.target.value.substring(0, 6);
 
     const sanitizedValue = inputValue.startsWith("0")
       ? inputValue.substring(1)
