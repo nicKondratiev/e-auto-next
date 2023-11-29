@@ -14,12 +14,17 @@ export default function Button({ disabled, makeApiCall }: ButtonProps) {
 
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!disabled) {
-      makeApiCall !== undefined && makeApiCall();
-      router.push("listings");
-      setFormSubmitted();
-      reset();
+      if (makeApiCall !== undefined) {
+        try {
+          router.push("listings");
+          await makeApiCall();
+          reset();
+        } catch (err) {
+          console.log("Error during API call");
+        }
+      }
     } else {
       setFormSubmitted();
     }
