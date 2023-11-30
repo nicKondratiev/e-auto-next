@@ -3,3 +3,11 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.input::placeholder {
+  @apply text-gray-500;
+}
+
+.input {
+  @apply border font-light border-gray-300 h-14 w-96 px-4 rounded-lg;
+}
