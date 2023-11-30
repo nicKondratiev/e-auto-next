@@ -11,6 +11,7 @@ export default function Navbar() {
       >
         Add Listing
       </Link>
+      <Link href={"/user/login"}>Log in</Link>
     </nav>
   );
 }
