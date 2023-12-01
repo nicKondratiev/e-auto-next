@@ -14,13 +14,21 @@ export type InputFields = {
   img: string;
 };
 
-// type StringVoid = (val: string) => void;
+export type AuthFields = {
+  email: string;
+  username: string;
+  password: string;
+};
 
 type Store = {
   inputFields: InputFields;
+  authFields: AuthFields;
   isFormSubmitted: boolean;
   setFormSubmitted: () => void;
-  updateField: (fieldName: keyof InputFields, value: string) => void;
+  updateField: (
+    fieldName: keyof InputFields | keyof AuthFields,
+    value: string
+  ) => void;
   reset: () => void;
 };
 
@@ -38,25 +46,72 @@ const useStore = create<Store>((set) => ({
     mileage: "",
     img: "",
   },
+
+  authFields: {
+    email: "",
+    username: "",
+    password: "",
+  },
+
   isFormSubmitted: false,
   setFormSubmitted: () => set({ isFormSubmitted: true }),
 
   updateField: (fieldName, value) =>
-    set((state) => ({
-      inputFields: {
-        ...state.inputFields,
-        [fieldName]: value,
-      },
-    })),
+    set((state) => {
+      if (Object.keys(state.inputFields).includes(fieldName)) {
+        return {
+          inputFields: {
+            ...state.inputFields,
+            [fieldName]: value,
+          },
+        };
+      } else if (Object.keys(state.authFields).includes(fieldName)) {
+        return {
+          authFields: {
+            ...state.authFields,
+            [fieldName]: value,
+          },
+        };
+      } else {
+        return state;
+      }
+    }),
 
-  reset: () => {
-    set((state) => ({
-      inputFields: Object.fromEntries(
+  // updateField: (fieldName, value) =>
+  //   set((state) => ({
+  //     inputFields: {
+  //       ...state.inputFields,
+  //       [fieldName]: value,
+  //     },
+  //   })),
+
+  reset: () =>
+    set((state) => {
+      const resetInputFields = Object.fromEntries(
         Object.keys(state.inputFields).map((key) => [key, ""])
-      ) as InputFields,
-      isFormSubmitted: false,
-    }));
-  },
+      ) as InputFields;
+
+      const resetAuthFields: AuthFields = {
+        email: "",
+        username: "",
+        password: "",
+      };
+
+      return {
+        inputFields: resetInputFields,
+        authFields: resetAuthFields,
+        isFormSubmitted: false,
+      };
+    }),
+
+  // reset: () => {
+  //   set((state) => ({
+  //     inputFields: Object.fromEntries(
+  //       Object.keys(state.inputFields).map((key) => [key, ""])
+  //     ) as InputFields,
+  //     isFormSubmitted: false,
+  //   }));
+  // },
 }));
 
 export default useStore;

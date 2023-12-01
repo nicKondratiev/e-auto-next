@@ -4,8 +4,8 @@ import { InputField } from "../AuthForm";
 
 export default function LoginForm() {
   const loginInputs: InputField[] = [
-    { type: "text", placeholder: "Email | Username" },
-    { type: "password", placeholder: "Password" },
+    { fieldName: "email", type: "text", placeholder: "Email" },
+    { fieldName: "password", type: "password", placeholder: "Password" },
   ];
 
   return (

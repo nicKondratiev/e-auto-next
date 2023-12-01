@@ -1,8 +1,10 @@
 import Link from "next/link";
 
 import AuthInput from "../../components/input/AuthInput";
+import { AuthFields } from "../store";
 
 export type InputField = {
+  fieldName: keyof AuthFields;
   type: string;
   placeholder: string;
 };
@@ -32,6 +34,7 @@ export const AuthForm = ({
           {inputFields.map((input, index) => (
             <AuthInput
               key={index}
+              fieldName={input.fieldName}
               type={input.type}
               placeholder={input.placeholder}
             />
