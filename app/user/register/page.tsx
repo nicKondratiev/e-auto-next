@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AuthFields } from "../../store";
 import AuthInput from "../../../components/input/AuthInput";
+import SignupButton from "./SignupButton";
 
 export type InputField = {
   fieldName: keyof AuthFields;
@@ -29,9 +30,7 @@ export default function SignupForm() {
               placeholder={input.placeholder}
             />
           ))}
-          <button className="h-14 w-full rounded-full bg-blue-500 font-light text-white">
-            Confirm
-          </button>
+          <SignupButton />
           <span className="text-gray-500">
             {`With an existing account - `}
             <Link className=" text-blue-500" href="login">

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { InputField } from "../register/page";
 import AuthInput from "../../../components/input/AuthInput";
+import LoginButton from "./LoginButton";
 
 export default function LoginForm() {
   const loginInputs: InputField[] = [
@@ -22,9 +23,7 @@ export default function LoginForm() {
               placeholder={input.placeholder}
             />
           ))}
-          <button className="h-14 w-full rounded-full bg-blue-500 font-light text-white">
-            Log in
-          </button>
+          <LoginButton />
           <span className="text-gray-500">
             {`Don't have an account? - `}
             <Link className=" text-blue-500" href="register">

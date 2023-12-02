@@ -16,9 +16,7 @@ export default function AuthInput({
   type,
   placeholder,
 }: AuthInputProps) {
-  const { authFields, updateField, reset } = useStore();
-
-  console.log(authFields);
+  const { updateField, reset } = useStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateField(fieldName, e.target.value);
