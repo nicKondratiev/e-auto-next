@@ -1,6 +1,6 @@
 type AuthButtonProps = {
   buttonText: "Log in" | "Confirm";
-  handleSubmit: () => void;
+  handleSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export default function AuthButton({
