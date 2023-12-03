@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import User from "../../../models/User";
+import { connectMongoDB } from "../../../lib/mongodb";
 
 export async function POST(req: NextRequest) {
-  try {
-    const { username, email, password } = await req.json();
+  await connectMongoDB();
 
-    console.log([username, email, password]);
+  const { username, email, password } = await req.json();
+
+  try {
+    await User.create({ username, email, password });
 
     return NextResponse.json(
       { message: "User registered successfuly" },

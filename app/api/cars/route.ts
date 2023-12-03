@@ -1,19 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import mongoose from "mongoose";
+import { connectMongoDB } from "../../../lib/mongodb";
 
 import CarListing from "../../../models/CarListing";
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.z9i21le.mongodb.net/`;
-
-  try {
-    await mongoose.connect(MONGODB_URI);
-    console.log("connected to db");
-  } catch (err) {
-    const error = err as Error;
-    console.log("Something went wrong, " + error.message);
-  }
+  await connectMongoDB();
 
   const data = await request.json();
 
