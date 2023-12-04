@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
+import { AuthProvider } from "../app/Providers";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,14 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} flex justify-center bg-gray-200 py-5`}
-      >
-        <div className="flex w-full flex-col items-center gap-4 px-20">
-          <Navbar />
-          {children}
-        </div>
-      </body>
+      <AuthProvider>
+        <body
+          className={`${inter.className} flex justify-center bg-gray-200 py-5`}
+        >
+          <div className="flex w-full flex-col items-center gap-4 px-20">
+            <Navbar />
+            {children}
+          </div>
+        </body>
+      </AuthProvider>
     </html>
   );
 }
