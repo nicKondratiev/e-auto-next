@@ -1,10 +1,18 @@
 import Link from "next/link";
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+
 import { InputField } from "../register/page";
 import AuthInput from "../../../components/input/AuthInput";
 import LoginButton from "./LoginButton";
 
-export default function LoginForm() {
+export default async function LoginForm() {
+  const session = await getServerSession(authOptions);
+
+  if (session) redirect("/");
+
   const loginInputs: InputField[] = [
     { fieldName: "email", type: "text", placeholder: "Email" },
     { fieldName: "password", type: "password", placeholder: "Password" },

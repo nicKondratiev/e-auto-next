@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+
 import { AuthFields } from "../../store";
 import AuthInput from "../../../components/input/AuthInput";
 import SignupButton from "./SignupButton";
@@ -10,7 +14,11 @@ export type InputField = {
   placeholder: string;
 };
 
-export default function SignupForm() {
+export default async function SignupForm() {
+  const session = await getServerSession(authOptions);
+
+  if (session) redirect("/");
+
   const signupInputs: InputField[] = [
     { fieldName: "email", type: "text", placeholder: "Email" },
     { fieldName: "username", type: "text", placeholder: "Username" },
