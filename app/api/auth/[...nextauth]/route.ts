@@ -1,16 +1,21 @@
 import NextAuth from "next-auth/next";
-import CredentialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider, {
+  CredentialInput,
+} from "next-auth/providers/credentials";
 import { connectMongoDB } from "../../../../lib/mongodb";
 import User from "../../../../models/User";
 import bcrypt from "bcryptjs";
+import { SessionStrategy } from "next-auth";
 
-const authOptions = {
+type CredentialsType = Record<string, CredentialInput>;
+
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
-      credentials: {},
+      credentials: {} as CredentialsType,
       async authorize(credentials) {
-        const { email, password } = credentials;
+        const { email, password } = credentials as CredentialsType;
 
         try {
           await connectMongoDB();
@@ -19,7 +24,7 @@ const authOptions = {
           if (!user) return null;
 
           const isPasswordCorrect = await bcrypt.compare(
-            password,
+            password as string,
             user.password
           );
 
@@ -33,7 +38,7 @@ const authOptions = {
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as SessionStrategy,
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
