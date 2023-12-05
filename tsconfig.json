@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/auth/[...nextauth]/route.js",
+    "app/api/auth/[...nextauth]/route.ts",
     "app/Providers.js",
     "middlewares/auth-middleware.js"
   ],

@@ -1,6 +1,6 @@
 import SectionHeader from "../../../components/SectionHeader";
 
-import { rootContainerStyles } from "../page";
+import { rootContainerStyles } from "../ListingOptions";
 
 import PaymentsIcon from "@mui/icons-material/Payments";
 import PriceFilledCounter from "./PriceFilledCounter";

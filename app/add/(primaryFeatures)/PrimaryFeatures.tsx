@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import { rootContainerStyles } from "../page";
+import { rootContainerStyles } from "../ListingOptions";
 
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import Manu from "../../../components/dropdown/dropdown_components/Manu";

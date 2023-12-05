@@ -1,6 +1,6 @@
 import SectionHeader from "../../../components/SectionHeader";
 import ImgInput from "../../../components/input/input_components/ImgInput";
-import { rootContainerStyles } from "../page";
+import { rootContainerStyles } from "../ListingOptions";
 
 import PhotoIcon from "@mui/icons-material/Photo";
 import PhotoFilledCounter from "./PhotoFilledCounter";
