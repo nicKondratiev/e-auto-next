@@ -77,14 +77,6 @@ const useStore = create<Store>((set) => ({
       }
     }),
 
-  // updateField: (fieldName, value) =>
-  //   set((state) => ({
-  //     inputFields: {
-  //       ...state.inputFields,
-  //       [fieldName]: value,
-  //     },
-  //   })),
-
   reset: () =>
     set((state) => {
       const resetInputFields = Object.fromEntries(
@@ -103,15 +95,6 @@ const useStore = create<Store>((set) => ({
         isFormSubmitted: false,
       };
     }),
-
-  // reset: () => {
-  //   set((state) => ({
-  //     inputFields: Object.fromEntries(
-  //       Object.keys(state.inputFields).map((key) => [key, ""])
-  //     ) as InputFields,
-  //     isFormSubmitted: false,
-  //   }));
-  // },
 }));
 
 export default useStore;
