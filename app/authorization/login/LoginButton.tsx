@@ -1,7 +1,6 @@
 "use client";
 
 import useStore from "../../store";
-import { AuthFields } from "../../store";
 
 import AuthButton from "../../../components/button/button_components/AuthButton";
 import { signIn } from "next-auth/react";
@@ -13,26 +12,23 @@ export default function LoginButton() {
 
   const router = useRouter();
 
-  const data: Partial<AuthFields> = {
-    email: authFields.email,
-    password: authFields.password,
-  };
-
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
       const res = await signIn("credentials", {
-        data,
+        email: authFields.email,
+        password: authFields.password,
         redirect: false,
       });
 
       if (res?.error) {
-        console.log("something went wrong");
+        console.log("Invalid credentials");
         return;
       }
 
-      router.replace("/");
+      router.refresh();
+      router.push("/dashboard");
     } catch (err) {
       console.log(err);
     }

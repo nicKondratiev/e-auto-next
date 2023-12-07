@@ -1,10 +1,10 @@
 "use client";
 
-import FilledCounter from "../../../components/FilledCounter";
+import FilledCounter from "../../../../components/FilledCounter";
 
-import useStore from "../../store";
+import useStore from "../../../store";
 
-import { countTruthyValues } from "../../../utils/countTruthyValues";
+import { countTruthyValues } from "../../../../utils/countTruthyValues";
 
 export default function PriceFilledCounter() {
   const { inputFields } = useStore();

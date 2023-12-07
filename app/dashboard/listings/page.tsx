@@ -1,4 +1,4 @@
-import CarsList from "../../components/CarsList";
+import CarsList from "../../../components/CarsList";
 
 export default function Listings() {
   return (

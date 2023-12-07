@@ -2,7 +2,7 @@
 
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 
-import useStore from "../../store";
+import useStore from "../../../store";
 
 export default function ListingPreview() {
   const { inputFields } = useStore();

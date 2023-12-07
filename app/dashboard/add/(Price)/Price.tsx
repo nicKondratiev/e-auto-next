@@ -1,10 +1,10 @@
-import SectionHeader from "../../../components/SectionHeader";
+import SectionHeader from "../../../../components/SectionHeader";
 
 import { rootContainerStyles } from "../ListingOptions";
 
 import PaymentsIcon from "@mui/icons-material/Payments";
 import PriceFilledCounter from "./PriceFilledCounter";
-import PriceInput from "../../../components/input/input_components/PriceInput";
+import PriceInput from "../../../../components/input/input_components/PriceInput";
 
 export default function Price() {
   return (

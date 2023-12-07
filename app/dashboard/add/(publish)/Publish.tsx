@@ -1,5 +1,5 @@
 import { rootContainerStyles } from "../ListingOptions";
-import PublishButton from "../../../components/button/button_components/PublishButton";
+import PublishButton from "../../../../components/button/button_components/PublishButton";
 
 export default function Publish() {
   return (
