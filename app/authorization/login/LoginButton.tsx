@@ -4,13 +4,21 @@ import useStore from "../../store";
 
 import AuthButton from "../../../components/button/button_components/AuthButton";
 import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
-import { useRouter } from "next/navigation";
+type LoginButtonProps = {
+  setError: Dispatch<SetStateAction<boolean>>;
+};
 
-export default function LoginButton() {
+export default function LoginButton({ setError }: LoginButtonProps) {
   const { authFields } = useStore();
 
   const router = useRouter();
+  const params = useSearchParams();
+  const callbackUrl = params.get("callbackUrl") || "/";
+
+  console.log(callbackUrl);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -19,16 +27,16 @@ export default function LoginButton() {
       const res = await signIn("credentials", {
         email: authFields.email,
         password: authFields.password,
-        redirect: false,
+        redirect: true,
+        callbackUrl: callbackUrl,
       });
 
       if (res?.error) {
-        console.log("Invalid credentials");
+        setError(true);
         return;
       }
 
       router.refresh();
-      router.push("/dashboard");
     } catch (err) {
       console.log(err);
     }

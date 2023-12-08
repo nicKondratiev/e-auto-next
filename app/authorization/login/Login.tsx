@@ -2,11 +2,19 @@
 
 import Link from "next/link";
 
+import { useState } from "react";
+
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+
 import { InputField } from "../register/page";
 import AuthInput from "../../../components/input/AuthInput";
 import LoginButton from "./LoginButton";
 
 export default function LoginForm() {
+  const [error, setError] = useState<boolean>(false);
+
+  console.log(error);
+
   const loginInputs: InputField[] = [
     { fieldName: "email", type: "text", placeholder: "Email" },
     { fieldName: "password", type: "password", placeholder: "Password" },
@@ -25,7 +33,17 @@ export default function LoginForm() {
               placeholder={input.placeholder}
             />
           ))}
-          <LoginButton />
+          {error && (
+            <div className="flex w-full items-center justify-start gap-3">
+              <span>
+                <ErrorOutlineIcon className="text-red-500" fontSize="medium" />
+              </span>
+              <p className="font-light text-red-500">
+                Username or password is incorrect
+              </p>
+            </div>
+          )}
+          <LoginButton setError={setError} />
           <span className="text-gray-500">
             {`Don't have an account? - `}
             <Link className=" text-blue-500" href="register">
