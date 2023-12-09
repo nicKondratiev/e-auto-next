@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const RequiredString = {
   type: String,
@@ -6,6 +6,11 @@ const RequiredString = {
 };
 
 const CarListingSchema = new mongoose.Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   manu: RequiredString,
   model: RequiredString,
   location: RequiredString,

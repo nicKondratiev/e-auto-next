@@ -11,7 +11,7 @@ const UserModel = new mongoose.Schema(
     email: RequiredString,
     password: RequiredString,
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 const User = mongoose.models.User || mongoose.model("User", UserModel);
