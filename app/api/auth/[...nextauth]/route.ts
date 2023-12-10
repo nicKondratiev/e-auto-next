@@ -5,7 +5,7 @@ import CredentialsProvider, {
 import { connectMongoDB } from "../../../../lib/mongodb";
 import User from "../../../../models/User";
 import bcrypt from "bcryptjs";
-import { SessionStrategy } from "next-auth";
+import { AuthOptions, SessionStrategy } from "next-auth";
 
 type CredentialsType = Record<string, CredentialInput>;
 
@@ -39,13 +39,42 @@ export const authOptions = {
   ],
   session: {
     strategy: "jwt" as SessionStrategy,
+    maxAge: 60 * 60 * 24 * 30,
+  },
+  callbacks: {
+    async session({
+      session,
+      user,
+      token,
+    }: {
+      session: any;
+      user: any;
+      token: any;
+    }) {
+      session.user = token.user;
+      return session;
+    },
+    async jwt({
+      token,
+      session,
+      user,
+    }: {
+      token: any;
+      session: any;
+      user: any;
+    }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/auth/signin",
   },
 };
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions as AuthOptions);
 
 export { handler as GET, handler as POST };
