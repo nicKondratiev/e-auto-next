@@ -26,7 +26,7 @@ export default async function SignupForm() {
   ];
 
   return (
-    <div className="">
+    <div className="w-fit">
       <div className="flex flex-col gap-10">
         <h1 className="text-4xl font-bold">Create Account</h1>
         <form className="flex flex-col items-center gap-4">
@@ -41,7 +41,7 @@ export default async function SignupForm() {
           <SignupButton />
           <span className="text-gray-500">
             {`With an existing account - `}
-            <Link className=" text-blue-500" href="login">
+            <Link className=" text-blue-500" href="/">
               Log in
             </Link>
           </span>

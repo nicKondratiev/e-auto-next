@@ -13,8 +13,6 @@ import LoginButton from "./LoginButton";
 export default function LoginForm() {
   const [error, setError] = useState<boolean>(false);
 
-  console.log(error);
-
   const loginInputs: InputField[] = [
     { fieldName: "email", type: "text", placeholder: "Email" },
     { fieldName: "password", type: "password", placeholder: "Password" },

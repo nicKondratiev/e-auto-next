@@ -6,8 +6,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <nav>
+    <section className="flex h-max flex-col items-center gap-5 bg-gray-50 px-10 py-5">
+      <nav className="w-full">
         <Navbar />
       </nav>
       {children}

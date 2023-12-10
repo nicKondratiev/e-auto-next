@@ -3,7 +3,7 @@
 import useStore from "../../store";
 
 import AuthButton from "../../../components/button/button_components/AuthButton";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 
@@ -13,22 +13,18 @@ type LoginButtonProps = {
 
 export default function LoginButton({ setError }: LoginButtonProps) {
   const { authFields } = useStore();
-
   const router = useRouter();
   const params = useSearchParams();
   const callbackUrl = params.get("callbackUrl") || "/";
-
-  console.log(callbackUrl);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
       const res = await signIn("credentials", {
+        redirect: false,
         email: authFields.email,
         password: authFields.password,
-        redirect: true,
-        callbackUrl: callbackUrl,
       });
 
       if (res?.error) {
@@ -36,7 +32,11 @@ export default function LoginButton({ setError }: LoginButtonProps) {
         return;
       }
 
-      router.refresh();
+      const session = await getSession();
+
+      console.log(session);
+
+      router.replace(callbackUrl !== "/" ? callbackUrl : "/dashboard");
     } catch (err) {
       console.log(err);
     }
