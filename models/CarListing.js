@@ -6,7 +6,7 @@ const RequiredString = {
 };
 
 const CarListingSchema = new mongoose.Schema({
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
