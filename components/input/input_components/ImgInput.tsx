@@ -3,8 +3,6 @@
 import { useRef } from "react";
 import useStore from "../../../app/store";
 
-import Image from "next/image";
-
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 export default function ImgInput() {
@@ -12,15 +10,28 @@ export default function ImgInput() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files && event.target.files[0];
 
     if (file) {
-      const imgURL = URL.createObjectURL(file);
-      updateField("img", imgURL);
-    }
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "listing-imgs");
 
-    console.log(file);
+      await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      ).then(async (res) => {
+        const data = await res.json();
+
+        updateField("img", data.secure_url);
+      });
+    }
   };
 
   return (
@@ -39,6 +50,7 @@ export default function ImgInput() {
         Upload Photo
       </div>
       <input
+        name="image"
         ref={inputRef}
         type="file"
         accept="image/jpeg,image/png,image/heif,image/heic, image/webp"
