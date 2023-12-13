@@ -5,16 +5,22 @@ import EditIcon from "@mui/icons-material/Edit";
 import RemoveBtn from "./RemoveBtn";
 import { ListingType } from "../app/dashboard/listings/page";
 
-export default function CarsList({ carListing }: { carListing: ListingType }) {
+export default function CarsList({
+  carListing,
+  handleDelete,
+}: {
+  carListing: ListingType;
+  handleDelete: () => Promise<Response>;
+}) {
   return (
     <div className="flex h-48 gap-4 rounded-lg bg-white p-4">
       <div className="w-2/6 overflow-hidden rounded-lg bg-gray-500">
         <Image
           className="h-full w-full"
-          src={`${carListing.img}`}
+          src={carListing.img}
           alt="carImage"
-          width={100}
-          height={100}
+          width={1000}
+          height={1000}
         />
       </div>
 
@@ -45,7 +51,9 @@ export default function CarsList({ carListing }: { carListing: ListingType }) {
         </div>
         <h1>{carListing.price} $</h1>
         <div className="flex gap-2">
-          <RemoveBtn />
+          <button onClick={handleDelete}>
+            <RemoveBtn />
+          </button>
           <Link href={"/editListing/1"}>
             <EditIcon fontSize="medium" />
           </Link>
