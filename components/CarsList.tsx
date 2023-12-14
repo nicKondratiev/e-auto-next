@@ -1,17 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import EditIcon from "@mui/icons-material/Edit";
 import RemoveBtn from "./RemoveBtn";
 import { ListingType } from "../app/dashboard/listings/page";
+import { useRouter } from "next/navigation";
 
 export default function CarsList({
   carListing,
   handleDelete,
 }: {
   carListing: ListingType;
-  handleDelete: () => Promise<Response>;
+  handleDelete: (carId: string) => Promise<void>;
 }) {
+  const router = useRouter();
+
   return (
     <div className="flex h-48 gap-4 rounded-lg bg-white p-4">
       <div className="w-2/6 overflow-hidden rounded-lg bg-gray-500">
@@ -51,9 +56,13 @@ export default function CarsList({
         </div>
         <h1>{carListing.price} $</h1>
         <div className="flex gap-2">
-          <button onClick={handleDelete}>
+          <div
+            onClick={async () => {
+              await handleDelete(carListing._id).then(() => router.refresh());
+            }}
+          >
             <RemoveBtn />
-          </button>
+          </div>
           <Link href={"/editListing/1"}>
             <EditIcon fontSize="medium" />
           </Link>
