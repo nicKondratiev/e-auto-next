@@ -18,9 +18,11 @@ export default function Button({ disabled, makeApiCall }: ButtonProps) {
     if (!disabled) {
       if (makeApiCall !== undefined) {
         try {
-          router.push("listings");
-          await makeApiCall();
-          reset();
+          await makeApiCall().then(() => {
+            router.refresh();
+            router.push("listings");
+            reset();
+          });
         } catch (err) {
           console.log("Error during API call");
         }
