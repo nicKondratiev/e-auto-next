@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import RemoveBtn from "./RemoveBtn";
 import { ListingType } from "../app/dashboard/listings/page";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function CarsList({
   carListing,
@@ -15,10 +16,22 @@ export default function CarsList({
   carListing: ListingType;
   handleDelete: (carId: string) => Promise<void>;
 }) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const router = useRouter();
 
+  const handleClick = async () => {
+    try {
+      await handleDelete(carListing._id).then(() => {
+        router.refresh();
+      });
+    } catch (err) {
+      console.log("something went wrong");
+    }
+  };
+
   return (
-    <div className="flex h-48 gap-4 rounded-lg bg-white p-4">
+    <div className=" flex h-48 gap-4 rounded-lg bg-white p-4">
       <div className="w-2/6 overflow-hidden rounded-lg bg-gray-500">
         <Image
           className="h-full w-full"
@@ -49,6 +62,39 @@ export default function CarsList({
         </div>
       </div>
 
+      {isModalOpen && (
+        <div className="absolute left-1/2 top-1/2 h-[150px] w-[400px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg border bg-white text-white shadow-lg">
+          <div className="flex h-1/4 items-center justify-between bg-blue-600 px-4">
+            <p>Message</p>
+            <span
+              className="cursor-pointer"
+              onClick={() => setIsModalOpen(false)}
+            >
+              x
+            </span>
+          </div>
+          <div className="flex h-2/4 items-center justify-center bg-gray-50 text-center">
+            <p className="text-black">Are you sure that you want to delete?</p>
+          </div>
+          <div className="flex h-1/4 w-full items-center justify-center gap-2 bg-gray-200 py-2 text-sm">
+            <button
+              onClick={() => {
+                handleClick(), setIsModalOpen(false);
+              }}
+              className="w-[70px] rounded-sm bg-blue-600"
+            >
+              OK
+            </button>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="w-[70px] rounded-sm bg-blue-600"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-col items-end justify-between gap-2">
         <div className="flex gap-3">
           <h3>{carListing.location}</h3>
@@ -56,11 +102,8 @@ export default function CarsList({
         </div>
         <h1>{carListing.price} $</h1>
         <div className="flex gap-2">
-          <div
-            onClick={async () => {
-              await handleDelete(carListing._id).then(() => router.refresh());
-            }}
-          >
+          {/* <div onClick={handleClick}> */}
+          <div onClick={() => setIsModalOpen(true)}>
             <RemoveBtn />
           </div>
           <Link href={"/editListing/1"}>
