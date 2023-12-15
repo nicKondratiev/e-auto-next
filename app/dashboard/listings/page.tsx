@@ -3,6 +3,8 @@ import { InputFields } from "../../store";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export type ListingType = InputFields & { _id: string };
 
@@ -33,14 +35,16 @@ export default async function Listings() {
   const carListings = res.data;
 
   return (
-    <div className="flex w-[800px] flex-col gap-4">
-      {carListings.map((listing: ListingType, index: number) => (
-        <CarsList
-          handleDelete={handleDelete}
-          key={index}
-          carListing={listing}
-        />
-      ))}
-    </div>
+    <Suspense fallback={<Loading />}>
+      <div className="flex w-[800px] flex-col gap-4">
+        {carListings.map((listing: ListingType, index: number) => (
+          <CarsList
+            handleDelete={handleDelete}
+            key={index}
+            carListing={listing}
+          />
+        ))}
+      </div>
+    </Suspense>
   );
 }
