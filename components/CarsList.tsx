@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
+
 import RemoveBtn from "./RemoveBtn";
 import { ListingType } from "../app/dashboard/listings/page";
 import { useRouter } from "next/navigation";
@@ -31,7 +33,7 @@ export default function CarsList({
   };
 
   return (
-    <div className=" flex h-48 gap-4 rounded-lg bg-white p-4">
+    <div className="flex h-48 gap-4 rounded-lg bg-white p-4">
       <div className="w-2/6 overflow-hidden rounded-lg bg-gray-500">
         <Image
           className="h-full w-full"
@@ -63,35 +65,43 @@ export default function CarsList({
       </div>
 
       {isModalOpen && (
-        <div className="absolute left-1/2 top-1/2 h-[150px] w-[400px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg border bg-white text-white shadow-lg">
-          <div className="flex h-1/4 items-center justify-between bg-blue-600 px-4">
-            <p>Message</p>
-            <span
-              className="cursor-pointer"
-              onClick={() => setIsModalOpen(false)}
-            >
-              x
-            </span>
+        <div className="absolute left-0 top-0 z-0 h-full w-full">
+          <div className="absolute left-1/2 top-1/2 z-50 h-[200px] w-[450px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-white text-white shadow-lg">
+            <div className="flex h-1/4 items-center justify-between bg-blue-600 px-4">
+              <p>Message</p>
+              <span
+                className="cursor-pointer"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <CloseIcon fontSize="small" />
+              </span>
+            </div>
+            <div className="flex h-2/4 items-center justify-center bg-gray-50 text-center">
+              <p className="text-black">
+                Are you sure that you want to delete?
+              </p>
+            </div>
+            <div className="flex h-1/4 w-full items-center justify-center gap-2 bg-gray-200 py-2 text-sm">
+              <button
+                onClick={() => {
+                  handleClick(), setIsModalOpen(false);
+                }}
+                className="w-[70px] rounded-sm bg-blue-600"
+              >
+                OK
+              </button>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="w-[70px] rounded-sm bg-blue-600"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-          <div className="flex h-2/4 items-center justify-center bg-gray-50 text-center">
-            <p className="text-black">Are you sure that you want to delete?</p>
-          </div>
-          <div className="flex h-1/4 w-full items-center justify-center gap-2 bg-gray-200 py-2 text-sm">
-            <button
-              onClick={() => {
-                handleClick(), setIsModalOpen(false);
-              }}
-              className="w-[70px] rounded-sm bg-blue-600"
-            >
-              OK
-            </button>
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="w-[70px] rounded-sm bg-blue-600"
-            >
-              Cancel
-            </button>
-          </div>
+          <div
+            onClick={() => setIsModalOpen(false)}
+            className="absolute left-0 top-0 z-10 h-screen w-screen bg-black opacity-60"
+          ></div>
         </div>
       )}
 
