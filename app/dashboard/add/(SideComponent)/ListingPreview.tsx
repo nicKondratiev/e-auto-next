@@ -3,6 +3,7 @@
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 
 import useStore from "../../../store";
+import Image from "next/image";
 
 export default function ListingPreview() {
   const { inputFields } = useStore();
@@ -26,8 +27,9 @@ export default function ListingPreview() {
     <div className="flex h-[280px] flex-col items-center justify-between rounded-lg bg-white p-4 text-xs font-semibold">
       <div className="flex h-[140px] w-full items-center justify-center overflow-hidden rounded-lg bg-gray-200">
         {inputFields.img ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
+            width={700}
+            height={700}
             alt="carPreview"
             src={inputFields.img}
             className="h-full w-full object-cover object-center"
