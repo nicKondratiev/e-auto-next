@@ -1,9 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-
-import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 
 import RemoveBtn from "./RemoveBtn";
@@ -33,7 +30,7 @@ export default function CarsList({
   };
 
   return (
-    <div className="flex h-48 gap-4 rounded-lg bg-white p-4">
+    <div className="flex h-48 gap-4 rounded-lg border bg-white p-4 shadow-sm">
       <div className="w-2/6 overflow-hidden rounded-lg bg-gray-500">
         <Image
           className="h-full w-full"
@@ -112,13 +109,9 @@ export default function CarsList({
         </div>
         <h1>{carListing.price} $</h1>
         <div className="flex gap-2">
-          {/* <div onClick={handleClick}> */}
           <div onClick={() => setIsModalOpen(true)}>
             <RemoveBtn />
           </div>
-          <Link href={"/editListing/1"}>
-            <EditIcon fontSize="medium" />
-          </Link>
         </div>
       </div>
     </div>
