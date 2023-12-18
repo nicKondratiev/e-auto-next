@@ -35,7 +35,7 @@ export default async function CarsData({ page }: { page: number }) {
   const carListings = res.data;
 
   return (
-    <div className="grid h-full w-[800px] grid-cols-1 grid-rows-3 flex-col items-center">
+    <div className="grid h-full w-[800px] grid-cols-1 grid-rows-3 flex-col items-center gap-4">
       {carListings.reverse().map((listing: ListingType, index: number) => (
         <CarsList
           handleDelete={handleDelete}
