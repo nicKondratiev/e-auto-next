@@ -4,24 +4,20 @@ import { connectMongoDB } from "../../../lib/mongodb";
 
 import CarListing from "../../../models/CarListing";
 import User from "../../../models/User";
-import { redirect } from "next/navigation";
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
+  const data = await request.json();
   await connectMongoDB();
 
-  const data = await request.json();
-
-  const dataWithDate = {
-    ...data,
-    date: new Date(),
-  };
-
   try {
-    await CarListing.create(dataWithDate);
-    console.log("added to db: ", { dataWithDate });
+    const document = await CarListing.create(data);
+
+    console.log("added to db: ", document);
+
     return NextResponse.json({ message: "added to db" }, { status: 201 });
   } catch (err) {
     console.log("something went wrong: ", err);
+
     return NextResponse.json(
       { message: "something went wrong" },
       { status: 404 }
@@ -37,10 +33,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
   const limit = 3;
   const skip = (Number(page) - 1) * limit;
 
-  console.log(userId);
-
-  console.log(page);
-
   await connectMongoDB();
 
   try {
@@ -50,11 +42,17 @@ export async function GET(request: NextRequest, response: NextResponse) {
       return NextResponse.json({ error: "Wasn't able to find user." });
     }
 
+    const totalDocuments = await CarListing.countDocuments({ userId: userId });
+
     let carsData = await CarListing.find({ userId: userId })
+      .sort({ createdAt: -1 })
       .limit(limit)
       .skip(skip);
 
-    return NextResponse.json({ data: carsData });
+    return NextResponse.json({
+      data: carsData,
+      totalPages: Math.ceil(totalDocuments / limit),
+    });
   } catch (err) {
     return NextResponse.json({ error: "something went wrong." });
   }
