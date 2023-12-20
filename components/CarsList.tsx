@@ -4,7 +4,7 @@ import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
 
 import RemoveBtn from "./RemoveBtn";
-import { ListingType } from "../app/dashboard/listings/page";
+import { ListingType } from "../app/dashboard/listings/CarsData";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
