@@ -24,7 +24,7 @@ type Store = {
   inputFields: InputFields;
   authFields: AuthFields;
   isFormSubmitted: boolean;
-  setFormSubmitted: () => void;
+  setFormSubmitted: (val: boolean) => void;
   updateField: (
     fieldName: keyof InputFields | keyof AuthFields,
     value: string
@@ -54,7 +54,7 @@ const useStore = create<Store>((set) => ({
   },
 
   isFormSubmitted: false,
-  setFormSubmitted: () => set({ isFormSubmitted: true }),
+  setFormSubmitted: (val: boolean) => set({ isFormSubmitted: val }),
 
   updateField: (fieldName, value) =>
     set((state) => {
