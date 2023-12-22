@@ -1,9 +1,9 @@
 "use client";
 
-import useStore from "../../../app/store";
+import useStore from "../../../store";
 import { getSession } from "next-auth/react";
-import Button from "../../../components/button/Button";
-import { countTruthyValues } from "../../../utils/countTruthyValues";
+import Button from "../../../../components/button/Button";
+import { countTruthyValues } from "../../../../utils/countTruthyValues";
 import { DefaultSession } from "next-auth";
 
 export default function PublishButton() {
