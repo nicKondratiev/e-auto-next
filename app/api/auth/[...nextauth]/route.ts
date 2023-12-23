@@ -52,6 +52,7 @@ export const authOptions = {
       token: any;
     }) {
       session.user = token.user;
+      session.user.role = token.user.role;
       return session;
     },
     async jwt({
@@ -71,7 +72,7 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/auth/signin",
+    signIn: "/",
   },
 };
 
