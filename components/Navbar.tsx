@@ -17,6 +17,9 @@ export default async function Navbar() {
       >
         Add Listing
       </Link>
+      <Link className="" href={"/dashboard/admin"}>
+        ADMIN
+      </Link>
       {session ? <Logout /> : <Login />}
     </nav>
   );
