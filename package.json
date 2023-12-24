@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
+    "@nextui-org/react": "^2.2.9",
     "@types/bcryptjs": "^2.4.6",
     "@types/react-scroll": "^1.8.10",
     "@types/uuid": "^9.0.7",
