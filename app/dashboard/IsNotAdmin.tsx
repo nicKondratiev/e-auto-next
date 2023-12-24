@@ -3,7 +3,7 @@
 import ErrorIcon from "@mui/icons-material/Error";
 import Link from "next/link";
 
-export default function ErrorPage() {
+export default function IsNotAdmin() {
   return (
     <div>
       <div className="flex h-[300px] w-[500px] flex-col items-center justify-between rounded-lg bg-white py-14">
