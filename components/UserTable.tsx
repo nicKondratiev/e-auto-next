@@ -10,7 +10,7 @@ import {
   TableCell,
   getKeyValue,
 } from "@nextui-org/react";
-import { columns } from "../app/dashboard/admin/columns";
+import { columns, renderCell } from "../app/dashboard/admin/columns";
 import { User } from "../app/dashboard/admin/page";
 
 export default function UserTable({ users }: { users: User[] }) {
@@ -19,11 +19,12 @@ export default function UserTable({ users }: { users: User[] }) {
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={users}>
+      <TableBody items={users} emptyContent={"No users to display."}>
         {(item) => (
           <TableRow key={item._id}>
             {(columnKey) => (
-              <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
+              // <TableCell>{getKeyValue(item, columnKey)}</TableCell>
             )}
           </TableRow>
         )}
