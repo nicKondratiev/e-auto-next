@@ -9,26 +9,59 @@ import {
   TableRow,
   TableCell,
   Pagination,
+  Input,
 } from "@nextui-org/react";
 import { columns, renderCell } from "../app/dashboard/admin/columns";
 import { User } from "../app/dashboard/admin/page";
 
 export default function UserTable({ users }: { users: User[] }) {
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 5;
+  const [filterValue, setFilterValue] = useState("");
+  const hasSearchFilter = Boolean(filterValue);
 
-  const pages = Math.ceil(users.length / rowsPerPage);
+  const filteredItems = useMemo(() => {
+    let filteredUsers = [...users];
+
+    if (hasSearchFilter) {
+      filteredUsers = filteredUsers.filter((user) =>
+        user.username.toLowerCase().includes(filterValue.toLowerCase())
+      );
+    }
+
+    return filteredUsers;
+  }, [users, filterValue, hasSearchFilter]);
+  console.log(filteredItems);
+
+  const rowsPerPage = 5;
+  const [page, setPage] = useState(1);
+
+  const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return users.slice(start, end);
-  }, [page, users]);
+    return filteredItems.slice(start, end);
+  }, [page, filteredItems]);
+
+  const topContent = useMemo(() => {
+    return (
+      <div>
+        <Input
+          isClearable
+          className="w-2/5"
+          placeholder="Search by username..."
+          onChange={(e) => setFilterValue(e.target.value)}
+          value={filterValue}
+        />
+      </div>
+    );
+  }, [filterValue]);
 
   return (
     <Table
-      aria-label="Example table with dynamic content"
+      aria-label="Users table"
+      topContent={topContent}
+      // topContentPlacement="outside"
       bottomContent={
         <div className="flex justify-center">
           <Pagination
