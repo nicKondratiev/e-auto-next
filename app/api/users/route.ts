@@ -6,7 +6,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
   await connectMongoDB();
 
   try {
-    const users = await User.find().select("username email role");
+    const users = await User.find()
+      .select("username email role _id")
+      .sort({ createdAt: -1 });
 
     return NextResponse.json(users);
   } catch (err) {

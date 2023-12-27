@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
-import { notFound } from "next/navigation";
 import UserTable from "../../../components/UserTable";
 import IsNotAdmin from "../IsNotAdmin";
 
@@ -12,20 +11,15 @@ export type User = {
 };
 
 async function getUsers(): Promise<User[]> {
-  const res = await fetch("http://localhost:3000/api/users");
-  const users = await res.json();
-  return users.data;
+  const res = await fetch("http://localhost:3000/api/users", {
+    cache: "no-cache",
+  });
+
+  return res.json();
 }
 
 export default async function AdminPage() {
-  const data = await getUsers();
-
-  const users = data.map((user) => ({
-    username: user.username,
-    email: user.email,
-    role: user.role,
-    _id: user._id,
-  }));
+  const users = await getUsers();
 
   const session = await getServerSession(authOptions);
 
@@ -34,8 +28,8 @@ export default async function AdminPage() {
   }
 
   return (
-    <div>
-      <div className="container">
+    <div className="flex w-full justify-center">
+      <div className="w-1/2">
         <UserTable users={users} />
       </div>
     </div>
