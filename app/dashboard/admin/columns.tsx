@@ -2,6 +2,7 @@ import React from "react";
 import { User as UserType } from "./page";
 import { Tooltip, User, Chip } from "@nextui-org/react";
 import { EyeIcon, EditIcon, DeleteIcon } from "../../../components/icons";
+import DeleteButton from "../../../components/button/button_components/UserDelete_Button";
 
 export const columns = [
   {
@@ -27,15 +28,7 @@ export const renderCell = (user: UserType, columnKey: React.Key) => {
 
   switch (columnKey) {
     case "username":
-      return (
-        <User
-          // avatarProps={{ radius: "lg", src: user.avatar }}
-          // description={user.email}
-          name={cellValue}
-        >
-          {user.email}
-        </User>
-      );
+      return <User name={cellValue}>{user.email}</User>;
     case "role":
       return (
         <div className="flex flex-col">
@@ -50,33 +43,18 @@ export const renderCell = (user: UserType, columnKey: React.Key) => {
       );
     case "status":
       return (
-        <Chip
-          className="capitalize"
-          color={"success"}
-          // color={statusColorMap[user.status]}
-          size="sm"
-          variant="flat"
-        >
+        <Chip className="capitalize" color={"success"} size="sm" variant="flat">
           {cellValue}
         </Chip>
       );
     case "actions":
       return (
         <div className="relative flex items-center gap-2">
-          {/* <Tooltip content="Details">
-            <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-              <EyeIcon />
-            </span>
-          </Tooltip>
-          <Tooltip content="Edit user">
-            <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
-              <EditIcon />
-            </span>
-          </Tooltip> */}
           <Tooltip color="danger" content="Delete user">
-            <span className="cursor-pointer text-lg text-danger active:opacity-50">
+            {/* <span className="cursor-pointer text-lg text-danger active:opacity-50">
               <DeleteIcon />
-            </span>
+            </span> */}
+            <DeleteButton userId={user._id} />
           </Tooltip>
         </div>
       );

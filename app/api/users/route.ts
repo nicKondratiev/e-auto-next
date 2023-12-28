@@ -18,7 +18,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 export async function DELETE(req: NextRequest, res: NextResponse) {
   await connectMongoDB();
-  const { userId } = await req.json();
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get("userId");
 
   try {
     const userExists = await User.findById(userId);
