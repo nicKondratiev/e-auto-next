@@ -15,3 +15,24 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return NextResponse.json({ error: "something went wrong." });
   }
 }
+
+export async function DELETE(req: NextRequest, res: NextResponse) {
+  await connectMongoDB();
+  const { userId } = await req.json();
+
+  try {
+    const userExists = await User.findById(userId);
+
+    if (userExists) {
+      await User.findByIdAndDelete(userId);
+
+      return NextResponse.json(
+        `user with id - ${userId} was deleted successfully`
+      );
+    } else {
+      return NextResponse.json(`user with id - ${userId} doesn't exist`);
+    }
+  } catch (err) {
+    return NextResponse.json(err);
+  }
+}
