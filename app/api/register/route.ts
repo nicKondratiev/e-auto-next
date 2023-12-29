@@ -10,12 +10,18 @@ export async function POST(req: NextRequest) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    await User.create({ username, email, password: hashedPassword });
+    const userExists = await User.findOne({ username: username });
 
-    return NextResponse.json(
-      { message: "User registered successfuly" },
-      { status: 201 }
-    );
+    if (!userExists) {
+      await User.create({ username, email, password: hashedPassword });
+
+      return NextResponse.json(
+        { message: "User registered successfuly" },
+        { status: 201 }
+      );
+    } else {
+      return NextResponse.json({ err: "user already exists" });
+    }
   } catch (err) {
     return NextResponse.json({ message: "Error occured" }, { status: 500 });
   }
