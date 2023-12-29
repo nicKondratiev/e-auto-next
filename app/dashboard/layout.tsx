@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import Navbar from "../../components/Navbar";
-// import Loading from "./listings/Loading";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout

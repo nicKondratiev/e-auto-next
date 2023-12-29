@@ -29,7 +29,6 @@ export default function UserTable({ users }: { users: User[] }) {
 
     return filteredUsers;
   }, [users, filterValue, hasSearchFilter]);
-  console.log(filteredItems);
 
   const rowsPerPage = 5;
   const [page, setPage] = useState(1);
@@ -61,7 +60,6 @@ export default function UserTable({ users }: { users: User[] }) {
     <Table
       aria-label="Users table"
       topContent={topContent}
-      // topContentPlacement="outside"
       bottomContent={
         <div className="flex justify-center">
           <Pagination
