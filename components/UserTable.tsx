@@ -76,7 +76,10 @@ export default function UserTable({ users }: { users: User[] }) {
       </TableHeader>
       <TableBody items={items} emptyContent={"No users to display."}>
         {(item) => (
-          <TableRow key={item._id}>
+          <TableRow
+            className="cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100"
+            key={item._id}
+          >
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
