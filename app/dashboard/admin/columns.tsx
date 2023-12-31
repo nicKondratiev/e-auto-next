@@ -4,6 +4,7 @@ import React from "react";
 import { User as UserType } from "./page";
 import { Tooltip, User, Chip } from "@nextui-org/react";
 import DeleteButton from "../../../components/button/button_components/UserDelete_Button";
+import EyeButton from "../../../components/button/button_components/EyeIcon_Button";
 
 export const columns = [
   {
@@ -53,6 +54,9 @@ export const renderCell = (user: UserType, columnKey: React.Key) => {
         <div className="relative flex items-center gap-2">
           <Tooltip color="danger" content="Delete user">
             <DeleteButton userId={user._id} />
+          </Tooltip>
+          <Tooltip color="default">
+            <EyeButton />
           </Tooltip>
         </div>
       );
