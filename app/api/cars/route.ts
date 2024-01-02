@@ -29,7 +29,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
   const { searchParams } = new URL(request.url);
 
   const userId = searchParams.get("userId");
-  const page = Number(searchParams.get("page"));
+  const page = Number(searchParams.get("page")) || 1;
   const limit = 3;
   const skip = (Number(page) - 1) * limit;
 
@@ -51,6 +51,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
     return NextResponse.json({
       data: carsData,
+      totalListings: totalDocuments,
       totalPages: Math.ceil(totalDocuments / limit),
     });
   } catch (err) {

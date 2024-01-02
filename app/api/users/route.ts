@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectMongoDB } from "../../../lib/mongodb";
 import User from "../../../models/User";
 
-export async function GET(req: NextRequest, res: NextResponse) {
-  await connectMongoDB();
+connectMongoDB();
 
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const users = await User.find()
       .select("username email role _id")
@@ -17,7 +17,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 }
 
 export async function DELETE(req: NextRequest, res: NextResponse) {
-  await connectMongoDB();
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get("userId");
 
