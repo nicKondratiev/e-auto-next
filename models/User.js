@@ -15,6 +15,11 @@ const UserModel = new mongoose.Schema(
       required: true,
       default: "USER",
     },
+    isBanned: {
+      type: Boolean,
+      default: false,
+    },
+    banExpirationDate: { type: Date },
   },
   { timestamps: true }
 );
