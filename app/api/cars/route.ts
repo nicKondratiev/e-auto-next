@@ -10,11 +10,19 @@ export async function POST(request: NextRequest) {
   await connectMongoDB();
 
   try {
-    const document = await CarListing.create(data);
+    const userExists = await User.findById(data.userId);
 
-    console.log("added to db: ", document);
+    if (userExists) {
+      const document = await CarListing.create(data);
 
-    return NextResponse.json({ message: "added to db" }, { status: 201 });
+      console.log("added to db: ", document);
+
+      return NextResponse.json({ message: "added to db" }, { status: 201 });
+    } else
+      return NextResponse.json(
+        { message: "userId is not valid" },
+        { status: 404 }
+      );
   } catch (err) {
     console.log("something went wrong: ", err);
 
