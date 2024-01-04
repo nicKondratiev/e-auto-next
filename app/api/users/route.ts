@@ -5,14 +5,30 @@ import User from "../../../models/User";
 connectMongoDB();
 
 export async function GET(req: NextRequest, res: NextResponse) {
-  try {
-    const users = await User.find()
-      .select("username email role _id")
-      .sort({ createdAt: -1 });
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get("userId");
 
-    return NextResponse.json(users);
-  } catch (err) {
-    return NextResponse.json({ error: "something went wrong." });
+  if (userId) {
+    try {
+      const user = await User.findById(userId);
+
+      return NextResponse.json(user);
+    } catch (err) {
+      return NextResponse.json({
+        message: "something wennt wrong",
+        error: err,
+      });
+    }
+  } else {
+    try {
+      const users = await User.find()
+        .select("username email role _id")
+        .sort({ createdAt: -1 });
+
+      return NextResponse.json(users);
+    } catch (err) {
+      return NextResponse.json({ error: "something went wrong." });
+    }
   }
 }
 
