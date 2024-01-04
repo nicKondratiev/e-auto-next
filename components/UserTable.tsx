@@ -13,9 +13,11 @@ import {
 } from "@nextui-org/react";
 import { columns, renderCell } from "../app/dashboard/admin/columns";
 import { User } from "../app/dashboard/admin/page";
+import UserCard from "./UserCard";
 
 export default function UserTable({ users }: { users: User[] }) {
   const [filterValue, setFilterValue] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState("");
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
@@ -47,7 +49,8 @@ export default function UserTable({ users }: { users: User[] }) {
       <div>
         <Input
           isClearable
-          className="w-2/5"
+          size="sm"
+          className="w-[300px]"
           placeholder="Search by username..."
           onChange={(e) => setFilterValue(e.target.value)}
           value={filterValue}
@@ -57,35 +60,42 @@ export default function UserTable({ users }: { users: User[] }) {
   }, [filterValue]);
 
   return (
-    <Table
-      aria-label="Users table"
-      topContent={topContent}
-      bottomContent={
-        <div className="flex justify-center">
-          <Pagination
-            showControls
-            total={pages}
-            page={page}
-            onChange={(page) => setPage(page)}
-          />
-        </div>
-      }
-    >
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
-      </TableHeader>
-      <TableBody items={items} emptyContent={"No users to display."}>
-        {(item) => (
-          <TableRow
-            className="cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100"
-            key={item._id}
-          >
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <>
+      <Table
+        className="min-h-[500px] w-[800px]"
+        aria-label="Users table"
+        topContent={topContent}
+        bottomContent={
+          <div className="flex justify-center">
+            <Pagination
+              showControls
+              total={pages}
+              page={page}
+              onChange={(page) => setPage(page)}
+            />
+          </div>
+        }
+      >
+        <TableHeader columns={columns}>
+          {(column) => (
+            <TableColumn key={column.key}>{column.label}</TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={items} emptyContent={"No users to display."}>
+          {(item) => (
+            <TableRow
+              onClick={() => setSelectedUserId(item._id)}
+              className="cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100"
+              key={item._id}
+            >
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey)}</TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      <UserCard id={selectedUserId} />
+    </>
   );
 }
