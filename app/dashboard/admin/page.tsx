@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import UserTable from "../../../components/UserTable";
 import IsNotAdmin from "../IsNotAdmin";
+import UserCard from "../../../components/UserCard";
 
 export type User = {
   username: string;
@@ -29,7 +30,7 @@ export default async function AdminPage() {
 
   return (
     <div className="flex w-full justify-center">
-      <div className="w-1/2">
+      <div className="flex gap-2">
         <UserTable users={users} />
       </div>
     </div>
