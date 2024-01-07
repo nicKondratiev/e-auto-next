@@ -22,7 +22,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   } else {
     try {
       const users = await User.find()
-        .select("username email role _id")
+        .select("username email role createdAt isBanned banExpirationDate _id")
         .sort({ createdAt: -1 });
 
       return NextResponse.json(users);

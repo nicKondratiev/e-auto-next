@@ -17,7 +17,7 @@ import UserCard from "./UserCard";
 
 export default function UserTable({ users }: { users: User[] }) {
   const [filterValue, setFilterValue] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState("");
+  const [selectedUser, setSelectedUser] = useState();
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
@@ -84,7 +84,7 @@ export default function UserTable({ users }: { users: User[] }) {
         <TableBody items={items} emptyContent={"No users to display."}>
           {(item) => (
             <TableRow
-              onClick={() => setSelectedUserId(item._id)}
+              onClick={() => setSelectedUser(item)}
               className="cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100"
               key={item._id}
             >
@@ -95,7 +95,7 @@ export default function UserTable({ users }: { users: User[] }) {
           )}
         </TableBody>
       </Table>
-      <UserCard id={selectedUserId} />
+      <UserCard user={selectedUser!} />
     </>
   );
 }
