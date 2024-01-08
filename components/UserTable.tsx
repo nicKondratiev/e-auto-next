@@ -62,7 +62,7 @@ export default function UserTable({ users }: { users: User[] }) {
   return (
     <>
       <Table
-        className="min-h-[500px] w-[800px]"
+        className="min-h-[550px] w-[800px]"
         aria-label="Users table"
         topContent={topContent}
         bottomContent={
