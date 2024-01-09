@@ -2,16 +2,18 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import UserTable from "../../../components/UserTable";
 import IsNotAdmin from "../IsNotAdmin";
-import UserCard from "../../../components/UserCard";
 
-export type User = {
+export type UserInterface = {
   username: string;
   email: string;
   role: string;
   _id: string;
+  createdAt: string;
+  isBanned: boolean;
+  banExpirationDate: null | string;
 };
 
-async function getUsers(): Promise<User[]> {
+async function getUsers(): Promise<UserInterface[]> {
   const res = await fetch("http://localhost:3000/api/users", {
     cache: "no-cache",
   });

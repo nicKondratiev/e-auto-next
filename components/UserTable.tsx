@@ -12,12 +12,12 @@ import {
   Input,
 } from "@nextui-org/react";
 import { columns, renderCell } from "../app/dashboard/admin/columns";
-import { User } from "../app/dashboard/admin/page";
+import { UserInterface } from "../app/dashboard/admin/page";
 import UserCard from "./UserCard";
 
-export default function UserTable({ users }: { users: User[] }) {
+export default function UserTable({ users }: { users: UserInterface[] }) {
   const [filterValue, setFilterValue] = useState("");
-  const [selectedUser, setSelectedUser] = useState();
+  const [selectedUser, setSelectedUser] = useState<UserInterface>();
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
@@ -62,7 +62,7 @@ export default function UserTable({ users }: { users: User[] }) {
   return (
     <>
       <Table
-        className="min-h-[550px] w-[800px]"
+        className="min-h-[520px] w-[800px]"
         aria-label="Users table"
         topContent={topContent}
         bottomContent={

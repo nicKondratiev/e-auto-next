@@ -1,16 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { User as UserType } from "../app/dashboard/admin/page";
-import { Card, User } from "@nextui-org/react";
+import { User } from "@nextui-org/react";
 import { EditIcon } from "./icons";
 import AdminActions from "./AdminActions";
-
-type UserInterface = UserType & {
-  createdAt: string;
-  isBanned: boolean;
-  banExpirationDate: null | string;
-};
+import { UserInterface } from "../app/dashboard/admin/page";
 
 export default function UserCard({ user }: { user: UserInterface }) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

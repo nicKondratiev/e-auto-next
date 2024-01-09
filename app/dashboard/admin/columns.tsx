@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { User as UserType } from "./page";
+import { UserInterface } from "./page";
 import { Tooltip, User, Chip } from "@nextui-org/react";
 import DeleteButton from "../../../components/button/button_components/UserDelete_Button";
 import EyeButton from "../../../components/button/button_components/EyeIcon_Button";
@@ -25,8 +25,8 @@ export const columns = [
   },
 ];
 
-export const renderCell = (user: UserType, columnKey: React.Key) => {
-  const cellValue = user[columnKey as keyof UserType];
+export const renderCell = (user: UserInterface, columnKey: React.Key) => {
+  const cellValue = user[columnKey as keyof UserInterface];
 
   switch (columnKey) {
     case "username":
