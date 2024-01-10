@@ -5,7 +5,9 @@ export async function PUT(req: NextRequest, res: NextResponse) {
   try {
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get("userId");
-    const updatedUserData = req.body;
+    const updatedUserData = await req.json();
+
+    console.log(updatedUserData);
 
     if (!updatedUserData) {
       return NextResponse.json({ message: "please provide valid data" });
@@ -17,6 +19,8 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
     if (!updateUser) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
+    } else {
+      return NextResponse.json({ message: "updated user with id " + userId });
     }
   } catch (err) {
     const error = err as Error;

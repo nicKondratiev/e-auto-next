@@ -9,8 +9,6 @@ import { UserInterface } from "../app/dashboard/admin/page";
 export default function UserCard({ user }: { user: UserInterface }) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  console.log(user);
-
   const spanStyling = "flex gap-2 text-sm font-semibold";
 
   return (
@@ -65,6 +63,7 @@ export default function UserCard({ user }: { user: UserInterface }) {
 
             <div className="h-full">
               <AdminActions
+                key={Math.random()}
                 isBanned={user?.isBanned!}
                 userRole={user.role}
                 selectedUser={user}

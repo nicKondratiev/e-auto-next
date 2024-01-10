@@ -2,11 +2,12 @@ import { Button, Card, Slider } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import HistoryIcon from "@mui/icons-material/History";
 import { UserInterface } from "../app/dashboard/admin/page";
+import { useRouter } from "next/navigation";
 
 type AdminActionsTypes = {
-  isBanned: boolean;
-  userRole: UserInterface["role"];
   selectedUser: UserInterface;
+  userRole: UserInterface["role"];
+  isBanned: boolean;
 };
 
 export default function AdminActions({
@@ -14,13 +15,16 @@ export default function AdminActions({
   userRole,
   selectedUser,
 }: AdminActionsTypes) {
+  const router = useRouter();
+
   const [selectedDays, setSelectedDays] = useState<number>(0);
-  const [resultDate, setResultDate] = useState<string | null>(null);
+  const [resultDate, setResultDate] = useState<string | null>(
+    String(new Date().toLocaleDateString())
+  );
   const [updatedRole, setUpdatedRole] = useState<
     AdminActionsTypes["userRole"] | null
   >(null);
 
-  console.log(selectedDays);
   useEffect(() => {
     const currentDate = new Date();
     const futureDate = new Date(currentDate);
@@ -36,6 +40,25 @@ export default function AdminActions({
   }, [selectedUser]);
 
   console.log(updatedRole);
+
+  const updateUserRequest = (userId: UserInterface["_id"]) => {
+    fetch(`http://localhost:3000/api/admin/update-role?userId=${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...selectedUser, role: updatedRole }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("role updated");
+          router.refresh();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="flex h-full flex-col justify-between text-sm">
@@ -119,7 +142,12 @@ export default function AdminActions({
           </div>
         </Card>
       </div>
-      <Button color="primary" className="rounded-lg" disableAnimation>
+      <Button
+        onClick={() => updateUserRequest(selectedUser._id)}
+        color="primary"
+        className="rounded-lg"
+        disableAnimation
+      >
         Save Changes
       </Button>
     </div>
