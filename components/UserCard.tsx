@@ -64,7 +64,11 @@ export default function UserCard({ user }: { user: UserInterface }) {
             </div>
 
             <div className="h-full">
-              <AdminActions isBanned={user?.isBanned!} />
+              <AdminActions
+                isBanned={user?.isBanned!}
+                userRole={user.role}
+                selectedUser={user}
+              />
             </div>
           </div>
         )}

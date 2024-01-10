@@ -6,7 +6,7 @@ import IsNotAdmin from "../IsNotAdmin";
 export type UserInterface = {
   username: string;
   email: string;
-  role: string;
+  role: "ADMIN" | "USER";
   _id: string;
   createdAt: string;
   isBanned: boolean;
