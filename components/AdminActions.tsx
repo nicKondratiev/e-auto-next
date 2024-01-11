@@ -11,19 +11,18 @@ type AdminActionsTypes = {
 };
 
 export default function AdminActions({
-  isBanned,
   userRole,
   selectedUser,
 }: AdminActionsTypes) {
   const router = useRouter();
 
-  const [selectedDays, setSelectedDays] = useState<number>(0);
+  const [selectedDays, setSelectedDays] = useState<number | number[]>(0);
   const [resultDate, setResultDate] = useState<string | null>(
     String(new Date().toLocaleDateString())
   );
   const [updatedRole, setUpdatedRole] = useState<
     AdminActionsTypes["userRole"] | null
-  >(null);
+  >(userRole);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -39,7 +38,13 @@ export default function AdminActions({
     setUpdatedRole(null);
   }, [selectedUser]);
 
-  console.log(updatedRole);
+  const updateUserRole = (role: typeof userRole | null) => {
+    setUpdatedRole(role);
+  };
+
+  const updateSelectedDays = (val: number | number[]) => {
+    setSelectedDays(val);
+  };
 
   const updateUserRequest = (userId: UserInterface["_id"]) => {
     fetch(`http://localhost:3000/api/admin/update-role?userId=${userId}`, {
@@ -69,7 +74,7 @@ export default function AdminActions({
           <div className="flex gap-2 px-1">
             {userRole === "ADMIN" ? (
               <Button
-                onClick={() => setUpdatedRole("USER")}
+                onClick={() => updateUserRole("USER")}
                 size="sm"
                 color="primary"
                 variant={updatedRole ? "solid" : "bordered"}
@@ -80,7 +85,7 @@ export default function AdminActions({
               </Button>
             ) : (
               <Button
-                onClick={() => setUpdatedRole("ADMIN")}
+                onClick={() => updateUserRole("ADMIN")}
                 size="sm"
                 color="primary"
                 variant={updatedRole ? "solid" : "bordered"}
@@ -90,12 +95,13 @@ export default function AdminActions({
                 UPDATE TO ADMIN
               </Button>
             )}
-            <span
-              onClick={() => setUpdatedRole(null)}
+            <button
+              onClick={() => updateUserRole(null)}
+              disabled={!updatedRole}
               className="flex cursor-pointer items-center justify-center rounded-lg border border-red-300 bg-red-100 px-1  duration-150 active:box-border active:scale-105"
             >
               <HistoryIcon />
-            </span>
+            </button>
           </div>
         </Card>
         <Card className="flex flex-col rounded-lg px-2 py-3 shadow-small">
@@ -109,7 +115,7 @@ export default function AdminActions({
                   maxValue={28}
                   step={1}
                   getValue={(value) => `${value} Days`}
-                  onChangeEnd={(val) => setSelectedDays(val as number)}
+                  onChangeEnd={(val) => updateSelectedDays(val as number)}
                   size="sm"
                   marks={[
                     { value: 0, label: "0" },
@@ -145,8 +151,11 @@ export default function AdminActions({
       <Button
         onClick={() => updateUserRequest(selectedUser._id)}
         color="primary"
-        className="rounded-lg"
+        className="rounded-lg duration-300"
         disableAnimation
+        disabled={
+          !(updatedRole || selectedDays || (updatedRole && selectedDays))
+        }
       >
         Save Changes
       </Button>
