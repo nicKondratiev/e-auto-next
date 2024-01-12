@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectMongoDB } from "../../../lib/mongodb";
 import User from "../../../models/User";
-
-connectMongoDB();
+import { connectMongoDB } from "../../../lib/mongodb";
 
 export async function GET(req: NextRequest, res: NextResponse) {
+  await connectMongoDB();
+
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get("userId");
 
@@ -27,7 +27,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
       return NextResponse.json(users);
     } catch (err) {
-      return NextResponse.json({ error: "something went wrong." });
+      const error = err as Error;
+      return NextResponse.json({
+        error: error.message,
+        message: "something went wrong.",
+      });
     }
   }
 }
