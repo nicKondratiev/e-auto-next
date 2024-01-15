@@ -8,11 +8,14 @@ type AdminActionsTypes = {
   selectedUser: UserInterface;
   userRole: UserInterface["role"];
   isBanned: boolean;
+  banExpirationDate: string | null;
 };
 
 export default function AdminActions({
   userRole,
   selectedUser,
+  isBanned,
+  banExpirationDate,
 }: AdminActionsTypes) {
   const router = useRouter();
 
@@ -20,6 +23,7 @@ export default function AdminActions({
   const [resultDate, setResultDate] = useState<string | null>(
     String(new Date().toLocaleDateString())
   );
+  const [isUnbanSelected, setIsUnbanSelected] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<
     AdminActionsTypes["userRole"] | null
   >(userRole);
@@ -52,7 +56,12 @@ export default function AdminActions({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...selectedUser, role: updatedRole }),
+      body: JSON.stringify({
+        ...selectedUser,
+        role: updatedRole || userRole,
+        isBanned: isUnbanSelected ? null : isBanned,
+        banExpirationDate: isUnbanSelected ? null : banExpirationDate,
+      }),
     })
       .then((res) => {
         if (res.ok) {
@@ -64,6 +73,8 @@ export default function AdminActions({
         console.log(err);
       });
   };
+
+  console.log(isUnbanSelected);
 
   return (
     <div className="flex h-full flex-col justify-between text-sm">
@@ -117,6 +128,7 @@ export default function AdminActions({
                   getValue={(value) => `${value} Days`}
                   onChangeEnd={(val) => updateSelectedDays(val as number)}
                   size="sm"
+                  isDisabled={isBanned}
                   marks={[
                     { value: 0, label: "0" },
                     { value: 7, label: "7" },
@@ -133,32 +145,52 @@ export default function AdminActions({
             </div>
 
             <div className="flex flex-col gap-2">
-              <span className="font-semibold">Suspension Period:</span>
-              <Card
-                className={`flex flex-row justify-center gap-1 rounded-lg border  ${
-                  Number(selectedDays)
-                    ? "border-red-300 bg-red-100"
-                    : "border-gray-300 bg-gray-200"
-                } px-1 py-2 font-medium duration-200`}
-              >
-                <span>{new Date().toLocaleDateString()}</span>-
-                <span>{resultDate}</span>
-              </Card>
+              {!isBanned ? (
+                <div>
+                  <span className="font-semibold">Suspension Period:</span>
+                  <Card
+                    className={`flex flex-row justify-center gap-1 rounded-lg border  ${
+                      Number(selectedDays)
+                        ? "border-red-300 bg-red-100"
+                        : "border-gray-300 bg-gray-200"
+                    } px-1 py-2 font-medium duration-200`}
+                  >
+                    <span>{new Date().toLocaleDateString()}</span>-
+                    <span>{resultDate}</span>
+                  </Card>
+                </div>
+              ) : (
+                <div>
+                  <span className="font-semibold">Remove Suspension:</span>
+                  <button
+                    onClick={() => setIsUnbanSelected(!isUnbanSelected)}
+                    className={`flex w-full flex-row items-center justify-center rounded-lg border border-blue-300 bg-blue-200 px-1 py-2 font-medium duration-300 hover:border-blue-400 hover:bg-blue-300 ${
+                      isUnbanSelected && "border-blue-600 bg-blue-600"
+                    }`}
+                  >
+                    Unban User
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </Card>
       </div>
-      <Button
+      <button
         onClick={() => updateUserRequest(selectedUser._id)}
         color="primary"
-        className="rounded-lg duration-300"
-        disableAnimation
+        className="w-full cursor-pointer rounded-lg bg-blue-500 py-2 font-semibold text-white duration-300"
         disabled={
-          !(updatedRole || selectedDays || (updatedRole && selectedDays))
+          !(
+            updatedRole ||
+            selectedDays ||
+            isUnbanSelected ||
+            (updatedRole && selectedDays)
+          )
         }
       >
         Save Changes
-      </Button>
+      </button>
     </div>
   );
 }

@@ -64,6 +64,7 @@ export default function UserCard({ user }: { user: UserInterface }) {
               <AdminActions
                 key={Math.random()}
                 isBanned={user?.isBanned!}
+                banExpirationDate={user.banExpirationDate}
                 userRole={user.role}
                 selectedUser={user}
               />
