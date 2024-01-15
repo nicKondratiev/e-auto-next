@@ -5,9 +5,10 @@ import { connectMongoDB } from "../../../lib/mongodb";
 import CarListing from "../../../models/CarListing";
 import User from "../../../models/User";
 
+connectMongoDB();
+
 export async function POST(request: NextRequest) {
   const data = await request.json();
-  await connectMongoDB();
 
   try {
     const userExists = await User.findById(data.userId);
@@ -41,8 +42,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
   const limit = 3;
   const skip = (Number(page) - 1) * limit;
 
-  await connectMongoDB();
-
   try {
     const userExists = await User.findById(userId);
 
@@ -70,8 +69,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const carId = await searchParams.get("carId");
-
-  await connectMongoDB();
 
   try {
     const carExists = await CarListing.findById(carId);

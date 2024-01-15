@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "../../../models/User";
 import { connectMongoDB } from "../../../lib/mongodb";
 
-export async function GET(req: NextRequest, res: NextResponse) {
-  await connectMongoDB();
+connectMongoDB();
 
-  const { searchParams } = new URL(req.url);
+export async function GET(req: NextRequest, res: NextResponse) {
+  const { searchParams } = await new URL(req.url);
   const userId = searchParams.get("userId");
 
+  let users;
   if (userId) {
     try {
       const user = await User.findById(userId);
@@ -17,13 +18,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
       return NextResponse.json({
         message: "something wennt wrong",
         error: err,
+        users: users,
       });
     }
   } else {
     try {
-      const users = await User.find()
+      users = await User.find()
         .select("username email role createdAt isBanned banExpirationDate _id")
         .sort({ createdAt: -1 });
+
+      console.log(users);
 
       return NextResponse.json(users);
     } catch (err) {
@@ -31,6 +35,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       return NextResponse.json({
         error: error.message,
         message: "something went wrong.",
+        users: users,
       });
     }
   }

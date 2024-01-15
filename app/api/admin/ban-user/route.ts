@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "../../../../models/User";
 import { connectMongoDB } from "../../../../lib/mongodb";
 
-export async function PUT(req: NextRequest, res: NextResponse) {
-  await connectMongoDB();
+connectMongoDB();
 
+export async function PUT(req: NextRequest, res: NextResponse) {
   try {
     const { userId, banDuration } = await req.json();
     const user = await User.findById(userId);
@@ -14,7 +14,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     }
 
     user.isBanned = true;
-    user.banExperationDate = new Date(
+    user.banExpirationDate = new Date(
       Date.now() + parseInt(banDuration) * 24 * 60 * 60 * 1000
     );
 

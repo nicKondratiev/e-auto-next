@@ -3,9 +3,9 @@ import User from "../../../models/User";
 import { connectMongoDB } from "../../../lib/mongodb";
 import bcrypt from "bcryptjs";
 
-export async function POST(req: NextRequest) {
-  await connectMongoDB();
+connectMongoDB();
 
+export async function POST(req: NextRequest) {
   const { username, email, password } = await req.json();
   const hashedPassword = await bcrypt.hash(password, 10);
 

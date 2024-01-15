@@ -1,5 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import User from "../../../../models/User";
+import { connectMongoDB } from "../../../../lib/mongodb";
+
+connectMongoDB();
 
 export async function PUT(req: NextRequest, res: NextResponse) {
   try {
