@@ -74,7 +74,19 @@ export default function AdminActions({
       });
   };
 
-  console.log(isUnbanSelected);
+  const banUser = (userId: UserInterface["_id"]) => {
+    if (!selectedDays) return;
+    fetch("http://localhost:3000/api/admin/ban-user", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        banDuration: selectedDays,
+      }),
+    });
+  };
 
   return (
     <div className="flex h-full flex-col justify-between text-sm">
@@ -177,7 +189,9 @@ export default function AdminActions({
         </Card>
       </div>
       <button
-        onClick={() => updateUserRequest(selectedUser._id)}
+        onClick={() => (
+          updateUserRequest(selectedUser._id), banUser(selectedUser._id)
+        )}
         color="primary"
         className="w-full cursor-pointer rounded-lg bg-blue-500 py-2 font-semibold text-white duration-300"
         disabled={
