@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import HistoryIcon from "@mui/icons-material/History";
 import { UserInterface } from "../app/dashboard/admin/page";
 import { useRouter } from "next/navigation";
+import { updateUser } from "../utils/updateUsers";
 
 type AdminActionsTypes = {
   selectedUser: UserInterface;
@@ -15,7 +16,6 @@ export default function AdminActions({
   userRole,
   selectedUser,
   isBanned,
-  banExpirationDate,
 }: AdminActionsTypes) {
   const router = useRouter();
 
@@ -48,44 +48,6 @@ export default function AdminActions({
 
   const updateSelectedDays = (val: number | number[]) => {
     setSelectedDays(val);
-  };
-
-  const updateUserRequest = (userId: UserInterface["_id"]) => {
-    fetch(`http://localhost:3000/api/admin/update-role?userId=${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...selectedUser,
-        role: updatedRole || userRole,
-        isBanned: isUnbanSelected ? null : isBanned,
-        banExpirationDate: isUnbanSelected ? null : banExpirationDate,
-      }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          console.log("role updated");
-          router.refresh();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const banUser = (userId: UserInterface["_id"]) => {
-    if (!selectedDays) return;
-    fetch("http://localhost:3000/api/admin/ban-user", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: userId,
-        banDuration: selectedDays,
-      }),
-    });
   };
 
   return (
@@ -189,9 +151,18 @@ export default function AdminActions({
         </Card>
       </div>
       <button
-        onClick={() => (
-          updateUserRequest(selectedUser._id), banUser(selectedUser._id)
-        )}
+        onClick={() =>
+          updateUser(
+            selectedUser._id,
+            selectedUser,
+            updatedRole!,
+            userRole,
+            isUnbanSelected,
+            isBanned,
+            selectedUser.banExpirationDate,
+            selectedDays
+          ).then(() => router.refresh())
+        }
         color="primary"
         className="w-full cursor-pointer rounded-lg bg-blue-500 py-2 font-semibold text-white duration-300"
         disabled={
