@@ -15,7 +15,10 @@ export type UserInterface = {
 
 async function getUsers(): Promise<UserInterface[]> {
   const res = await fetch("http://localhost:3000/api/users", {
-    cache: "no-cache",
+    next: {
+      tags: ["users-collection"],
+    },
+    cache: "default",
   });
 
   return res.json();
@@ -34,6 +37,7 @@ export default async function AdminPage() {
     <div className="flex w-full justify-center">
       <div className="flex gap-2">
         <UserTable users={users} />
+        {/* <UserTable users={users} key={Math.random()} /> */}
       </div>
     </div>
   );
