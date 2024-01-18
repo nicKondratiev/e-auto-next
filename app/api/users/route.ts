@@ -27,8 +27,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
         .select("username email role createdAt isBanned banExpirationDate _id")
         .sort({ createdAt: -1 });
 
-      console.log(users);
-
       return NextResponse.json(users);
     } catch (err) {
       const error = err as Error;

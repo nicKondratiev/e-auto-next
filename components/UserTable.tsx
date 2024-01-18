@@ -62,7 +62,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
   return (
     <>
       <Table
-        className="min-h-[520px] w-[800px]"
+        className="w-[800px]"
         aria-label="Users table"
         topContent={topContent}
         bottomContent={
@@ -85,7 +85,9 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
           {(item) => (
             <TableRow
               onClick={() => setSelectedUser(item)}
-              className="cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100"
+              className={`cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100 ${
+                item.isBanned && "bg-red-200 hover:bg-red-300"
+              }`}
               key={item._id}
             >
               {(columnKey) => (

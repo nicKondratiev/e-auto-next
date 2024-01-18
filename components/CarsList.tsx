@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import RemoveBtn from "./RemoveBtn";
 import { ListingType } from "../app/dashboard/listings/CarsData";
 import DeleteButton from "./button/button_components/ListingDelete_Button";
 
