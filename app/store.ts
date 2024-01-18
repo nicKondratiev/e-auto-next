@@ -20,14 +20,32 @@ export type AuthFields = {
   password: string;
 };
 
+export type UpdatedUserData = {
+  selectedDays: number | number[];
+  resultDate: string;
+  isUnbanSelected: boolean;
+  updatedRole: "ADMIN" | "USER" | null;
+};
+
+type FieldName = keyof InputFields | keyof AuthFields | keyof UpdatedUserData;
+
+type ValueType<T extends FieldName> = T extends keyof InputFields
+  ? InputFields[T]
+  : T extends keyof AuthFields
+  ? AuthFields[T]
+  : T extends keyof UpdatedUserData
+  ? UpdatedUserData[T]
+  : never;
+
 type Store = {
   inputFields: InputFields;
   authFields: AuthFields;
+  updatedUserData: UpdatedUserData;
   isFormSubmitted: boolean;
   setFormSubmitted: (val: boolean) => void;
   updateField: (
-    fieldName: keyof InputFields | keyof AuthFields,
-    value: string
+    fieldName: FieldName,
+    value: ValueType<typeof fieldName>
   ) => void;
   reset: () => void;
 };
@@ -53,6 +71,13 @@ const useStore = create<Store>((set) => ({
     password: "",
   },
 
+  updatedUserData: {
+    selectedDays: 0,
+    resultDate: String(new Date().toLocaleDateString()),
+    isUnbanSelected: false,
+    updatedRole: null,
+  },
+
   isFormSubmitted: false,
   setFormSubmitted: (val: boolean) => set({ isFormSubmitted: val }),
 
@@ -69,6 +94,13 @@ const useStore = create<Store>((set) => ({
         return {
           authFields: {
             ...state.authFields,
+            [fieldName]: value,
+          },
+        };
+      } else if (Object.keys(state.updatedUserData).includes(fieldName)) {
+        return {
+          updatedUserData: {
+            ...state.updatedUserData,
             [fieldName]: value,
           },
         };
@@ -89,9 +121,17 @@ const useStore = create<Store>((set) => ({
         password: "",
       };
 
+      const resetUpdatedUserData: UpdatedUserData = {
+        selectedDays: 0,
+        resultDate: String(new Date().toLocaleDateString()),
+        isUnbanSelected: false,
+        updatedRole: null,
+      };
+
       return {
         inputFields: resetInputFields,
         authFields: resetAuthFields,
+        updatedUserData: resetUpdatedUserData,
         isFormSubmitted: false,
       };
     }),
