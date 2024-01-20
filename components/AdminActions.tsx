@@ -4,6 +4,8 @@ import HistoryIcon from "@mui/icons-material/History";
 import { UserInterface } from "../app/dashboard/admin/page";
 import { useRouter } from "next/navigation";
 import { updateUser } from "../utils/updateUsers";
+import useStore from "../app/store";
+import { countTruthyValues } from "../utils/countTruthyValues";
 
 type AdminActionsTypes = {
   selectedUser: UserInterface;
@@ -18,15 +20,16 @@ export default function AdminActions({
   isBanned,
 }: AdminActionsTypes) {
   const router = useRouter();
+  const { updatedUserData, updateField, reset } = useStore();
+  const { selectedDays, isUnbanSelected, resultDate, updatedRole } =
+    updatedUserData;
 
-  const [selectedDays, setSelectedDays] = useState<number | number[]>(0);
-  const [resultDate, setResultDate] = useState<string | null>(
-    String(new Date().toLocaleDateString())
-  );
-  const [isUnbanSelected, setIsUnbanSelected] = useState<boolean>(false);
-  const [updatedRole, setUpdatedRole] = useState<
-    AdminActionsTypes["userRole"] | null
-  >(userRole);
+  console.log(updatedUserData);
+
+  useEffect(() => {
+    updateField("updatedRole", userRole);
+    reset();
+  }, [selectedUser, reset, userRole, updateField]);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -34,21 +37,19 @@ export default function AdminActions({
     futureDate.setDate(
       currentDate.getDate() + parseInt(String(selectedDays), 10)
     );
+    updateField("resultDate", futureDate.toLocaleDateString());
+  }, [selectedDays, updateField]);
 
-    setResultDate(futureDate.toLocaleDateString());
-  }, [selectedDays]);
+  const updateCount = countTruthyValues([
+    isUnbanSelected,
+    selectedDays,
+    updatedRole,
+  ]);
 
-  useEffect(() => {
-    setUpdatedRole(null);
-  }, [selectedUser]);
-
-  const updateUserRole = (role: typeof userRole | null) => {
-    setUpdatedRole(role);
-  };
-
-  const updateSelectedDays = (val: number | number[]) => {
-    setSelectedDays(val);
-  };
+  console.log("updatedUserRole", updatedRole);
+  console.log("userRole", userRole);
+  console.log("selectedDays", selectedDays);
+  console.log(updateCount);
 
   return (
     <div className="flex h-full flex-col justify-between text-sm">
@@ -59,7 +60,7 @@ export default function AdminActions({
           <div className="flex gap-2 px-1">
             {userRole === "ADMIN" ? (
               <Button
-                onClick={() => updateUserRole("USER")}
+                onClick={() => updateField("updatedRole", "USER")}
                 size="sm"
                 color="primary"
                 variant={updatedRole ? "solid" : "bordered"}
@@ -70,7 +71,7 @@ export default function AdminActions({
               </Button>
             ) : (
               <Button
-                onClick={() => updateUserRole("ADMIN")}
+                onClick={() => updateField("updatedRole", "ADMIN")}
                 size="sm"
                 color="primary"
                 variant={updatedRole ? "solid" : "bordered"}
@@ -81,7 +82,7 @@ export default function AdminActions({
               </Button>
             )}
             <button
-              onClick={() => updateUserRole(null)}
+              onClick={() => updateField("updatedRole", null)}
               disabled={!updatedRole}
               className="flex cursor-pointer items-center justify-center rounded-lg border border-red-300 bg-red-100 px-1  duration-150 active:box-border active:scale-105"
             >
@@ -99,8 +100,10 @@ export default function AdminActions({
                   minValue={0}
                   maxValue={28}
                   step={1}
+                  defaultValue={0}
                   getValue={(value) => `${value} Days`}
-                  onChangeEnd={(val) => updateSelectedDays(val as number)}
+                  value={selectedDays}
+                  onChange={(val) => updateField("selectedDays", val)}
                   size="sm"
                   isDisabled={isBanned}
                   marks={[
@@ -137,9 +140,12 @@ export default function AdminActions({
                 <div>
                   <span className="font-semibold">Remove Suspension:</span>
                   <button
-                    onClick={() => setIsUnbanSelected(!isUnbanSelected)}
+                    onClick={() =>
+                      updateField("isUnbanSelected", !isUnbanSelected)
+                    }
                     className={`flex w-full flex-row items-center justify-center rounded-lg border border-blue-300 bg-blue-200 px-1 py-2 font-medium duration-300 hover:border-blue-400 hover:bg-blue-300 ${
-                      isUnbanSelected && "border-blue-600 bg-blue-600"
+                      isUnbanSelected &&
+                      "border-blue-600 bg-blue-500 text-white"
                     }`}
                   >
                     Unban User
@@ -151,28 +157,21 @@ export default function AdminActions({
         </Card>
       </div>
       <button
-        onClick={() =>
-          updateUser(
-            selectedUser._id,
-            selectedUser,
-            updatedRole!,
-            userRole,
-            isUnbanSelected,
-            isBanned,
-            selectedUser.banExpirationDate,
-            selectedDays
-          ).then(() => router.refresh())
+        onClick={
+          () =>
+            updateUser(
+              selectedUser,
+              updatedRole!,
+              isUnbanSelected,
+              selectedDays
+            )
+          // ).then(() => router.refresh())
         }
         color="primary"
-        className="w-full cursor-pointer rounded-lg bg-blue-500 py-2 font-semibold text-white duration-300"
-        disabled={
-          !(
-            updatedRole ||
-            selectedDays ||
-            isUnbanSelected ||
-            (updatedRole && selectedDays)
-          )
-        }
+        className={`w-full rounded-lg bg-blue-500 py-2 font-semibold text-white duration-300 ${
+          !updateCount ? " cursor-default" : ""
+        }`}
+        disabled={!updateCount}
       >
         Save Changes
       </button>
