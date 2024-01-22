@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, User } from "@nextui-org/react";
 import { EditIcon } from "./icons";
 import AdminActions from "./AdminActions";
 import { UserInterface } from "../app/dashboard/admin/page";
 
-export default function UserCard({ user }: { user: UserInterface }) {
+export default function UserCard({
+  users,
+  userId,
+}: {
+  users: UserInterface[];
+  userId: UserInterface["_id"];
+}) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [user, setUser] = useState<UserInterface>();
+
+  useEffect(() => {
+    const selectedUser = users.filter((user) => user._id === userId)[0];
+    setUser(selectedUser);
+  }, [users, userId]);
 
   const spanStyling = "flex gap-2 text-sm font-semibold";
 

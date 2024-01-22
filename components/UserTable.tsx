@@ -17,7 +17,8 @@ import UserCard from "./UserCard";
 
 export default function UserTable({ users }: { users: UserInterface[] }) {
   const [filterValue, setFilterValue] = useState("");
-  const [selectedUser, setSelectedUser] = useState<UserInterface>();
+  // const [selectedUser, setSelectedUser] = useState<UserInterface>();
+  const [selectedUserId, setSelectedUserId] = useState<UserInterface["_id"]>();
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
@@ -31,6 +32,9 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
 
     return filteredUsers;
   }, [users, filterValue, hasSearchFilter]);
+
+  console.log(users);
+  // console.log(selectedUser);
 
   const rowsPerPage = 5;
   const [page, setPage] = useState(1);
@@ -84,7 +88,8 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
         <TableBody items={items} emptyContent={"No users to display."}>
           {(item) => (
             <TableRow
-              onClick={() => setSelectedUser(item)}
+              // onClick={() => setSelectedUser(item)}
+              onClick={() => setSelectedUserId(item._id)}
               className={`cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100 ${
                 item.isBanned && "bg-red-200 hover:bg-red-300"
               }`}
@@ -97,7 +102,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
           )}
         </TableBody>
       </Table>
-      <UserCard user={selectedUser!} />
+      <UserCard users={users} userId={selectedUserId!} />
     </>
   );
 }
