@@ -1,5 +1,5 @@
 import { Button, Card, Slider } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import HistoryIcon from "@mui/icons-material/History";
 import { UserInterface } from "../app/dashboard/admin/page";
 import { useRouter } from "next/navigation";
@@ -23,8 +23,7 @@ export default function AdminActions({
   const { updatedUserData, updateField, reset } = useStore();
   const { selectedDays, isUnbanSelected, resultDate, updatedRole } =
     updatedUserData;
-
-  console.log(updatedUserData);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     updateField("updatedRole", userRole);
@@ -40,16 +39,20 @@ export default function AdminActions({
     updateField("resultDate", futureDate.toLocaleDateString());
   }, [selectedDays, updateField]);
 
-  const updateCount = countTruthyValues([
-    isUnbanSelected,
-    selectedDays,
-    updatedRole,
-  ]);
+  const updateCount = useMemo(() => {
+    return countTruthyValues([isUnbanSelected, selectedDays, updatedRole]);
+  }, [isUnbanSelected, selectedDays, updatedRole]);
 
-  console.log("updatedUserRole", updatedRole);
-  console.log("userRole", userRole);
-  console.log("selectedDays", selectedDays);
-  console.log(updateCount);
+  const handleUserUpdate = async () => {
+    setIsLoading(true);
+
+    await updateUser(
+      selectedUser,
+      updatedRole!,
+      isUnbanSelected,
+      selectedDays
+    ).then(() => setIsLoading(false));
+  };
 
   return (
     <div className="flex h-full flex-col justify-between text-sm">
@@ -157,23 +160,14 @@ export default function AdminActions({
         </Card>
       </div>
       <button
-        onClick={
-          () =>
-            updateUser(
-              selectedUser,
-              updatedRole!,
-              isUnbanSelected,
-              selectedDays
-            )
-          // ).then(() => router.refresh())
-        }
+        onClick={handleUserUpdate}
         color="primary"
         className={`w-full rounded-lg bg-blue-500 py-2 font-semibold text-white duration-300 ${
           !updateCount ? " cursor-default" : ""
         }`}
         disabled={!updateCount}
       >
-        Save Changes
+        {!isLoading ? <span>Save Changes</span> : <span>Loading...</span>}
       </button>
     </div>
   );
