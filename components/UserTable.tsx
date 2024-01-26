@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -17,8 +17,8 @@ import UserCard from "./UserCard";
 
 export default function UserTable({ users }: { users: UserInterface[] }) {
   const [filterValue, setFilterValue] = useState("");
-  // const [selectedUser, setSelectedUser] = useState<UserInterface>();
-  const [selectedUserId, setSelectedUserId] = useState<UserInterface["_id"]>();
+  const [user, setUser] = useState<UserInterface>();
+  const [userId, setUserId] = useState<UserInterface["_id"]>();
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
@@ -29,12 +29,8 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
         user.username.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
-
     return filteredUsers;
   }, [users, filterValue, hasSearchFilter]);
-
-  console.log(users);
-  // console.log(selectedUser);
 
   const rowsPerPage = 5;
   const [page, setPage] = useState(1);
@@ -63,6 +59,11 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
     );
   }, [filterValue]);
 
+  useEffect(() => {
+    const user = filteredItems.filter((user) => user._id === userId)[0];
+    setUser(user);
+  }, [users, filteredItems, user, userId]);
+
   return (
     <>
       <Table
@@ -88,8 +89,9 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
         <TableBody items={items} emptyContent={"No users to display."}>
           {(item) => (
             <TableRow
-              // onClick={() => setSelectedUser(item)}
-              onClick={() => setSelectedUserId(item._id)}
+              onClick={() => {
+                setUser(item), setUserId(item._id);
+              }}
               className={`cursor-pointer duration-200 hover:scale-y-105 hover:bg-gray-100 ${
                 item.isBanned && "bg-red-200 hover:bg-red-300"
               }`}
@@ -102,7 +104,7 @@ export default function UserTable({ users }: { users: UserInterface[] }) {
           )}
         </TableBody>
       </Table>
-      <UserCard users={users} userId={selectedUserId!} />
+      <UserCard user={user!} />
     </>
   );
 }
