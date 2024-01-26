@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import "./styles.css";
 
 export default function Login() {
@@ -12,6 +13,7 @@ export default function Login() {
 
   return (
     <button className="button" onClick={handleClick}>
+      <PersonOutlineOutlinedIcon />
       Log in
     </button>
   );

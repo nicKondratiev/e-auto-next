@@ -1,6 +1,7 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import "./styles.css";
 
 export default function Logout() {
@@ -11,7 +12,8 @@ export default function Logout() {
   };
 
   return (
-    <button className="button" onClick={handleClick}>
+    <button className="button py-2 " onClick={handleClick}>
+      <LogoutOutlinedIcon />
       Logout
     </button>
   );
