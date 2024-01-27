@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# e-auto.ge user/admin panel 🚙
 
-## Getting Started
+Welcome my project, a web application designed with a focus on functionality and efficiency. In this project, my primary objective was to provide users with a seamless experience in managing their car listings, authentication processes, and empower administrators with tools to oversee and moderate user activities.
 
-First, run the development server:
+🚗 Key Features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+User Authentication: This web-app ensures a secure environment by implementing user authentication, allowing users to access personalized features.
+Car Listings Management: Users can effortlessly add, view, and delete their car listings, enhancing the overall user experience.
+Admin Functionality: Administrators have advanced capabilities, such as checking user details, suspending or promoting users, and managing user accounts.
+
+⚙️ Under the Hood:
+
+Efficient Functionality over UI: Unlike traditional projects prioritizing UI, I focused on delivering stable functionality. Efforts were invested in creating an efficient caching system, server-side pagination, MERN operations and in creating reusable code for a smooth and responsive user experience.
+Technology Stack: The project leverages cutting-edge technologies, including NextJS with TypeScript, tailwind & nextui for styling, mongoose as the database system, zustand for state management, next-auth for authentication, and cloudinary as a Content Delivery Network (CDN).
+
+![App Screenshot](./pngs/add-listing-page.png)
+![App Screenshot](./pngs/add-listing-not-filled.png)
+![App Screenshot](./pngs/listings-page.png)
+![App Screenshot](./pngs/admin-page.png)
+
+## How to run on your local machine
+
+Unfortunately this project is not hosted online, so you can run it on your local machine.
+
+```javascript
+    npm run install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Also don't forget to add .env.local file
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```javascript
+MONGO_USERNAME = "";
+MONGO_PASSWORD = "";
+MOGNO_CLUSTER = "";
+MONGO_URI = "";
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+NEXTAUTH_SECRET = "";
+NEXTAUTH_URL = "";
 
-## Learn More
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "";
+CLOUDINARY_API_KEY = "";
+CLOUDINARY_API_SECRET = "";
+```
 
-To learn more about Next.js, take a look at the following resources:
+And then run this to launch app:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```javascript
+    npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Thank you for checking out my project. 🙂
