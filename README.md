@@ -1,4 +1,4 @@
-# e-auto.ge user/admin panel 🚙
+# e-auto.ge user/admin Dasbhoard 🚙
 
 Welcome my project, a web application designed with a focus on functionality and efficiency. In this project, my primary objective was to provide users with a seamless experience in managing their car listings, authentication processes, and empower administrators with tools to oversee and moderate user activities.
 
